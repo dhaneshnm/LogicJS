@@ -13,24 +13,66 @@ var fsmMain = function fsmMain (states) {
 	this.state = new State("forward");
 	}
 
-	var PlayerMove = function PlayerMove(payerObject){
+	var PlayerMove = function PlayerMove(playerObject){
 	//dictates rules on the game object can move from one box to another.
- 		switch(payerObject.state.get_movement()){
+ 		switch(playerObject.state.get_movement()){
  		case "forward"://move  forward
- 		payerObject.Position = payerObject.Position+states; 		
+ 		playerObject.Position = playerObject.Position+states; 		 		
+ 		break;
+ 		case "back"://move  forward
+ 		playerObject.Position = playerObject.Position-states; 		 		
  		break;
  		case "left"://turn left
- 		payerObject.Position = payerObject.Position-1;
+ 		playerObject.Position = playerObject.Position+1;
  		break;
  		case "right"://turn right
- 		payerObject.Position = payerObject.Position+1;
+ 		playerObject.Position = playerObject.Position-1;
  		break;
  		default:
  		console.log("invalid input");
  		};
 	}	
-	var StateChange = function StateChange(newstate,payerObject){
-		payerObject.state =new State(newstate);
+	var StateChange = function StateChange(newstate,playerObject){
+		switch(playerObject.state.get_movement()){
+			case "forward"://move  forward
+		 		if(newstate === "forward") {
+		 			playerObject.state = new State("forward");
+		 			PlayerMove(playerObject);
+		 		}
+		 		else if(newstate === "left"){
+		 			playerObject.state = new State("left");
+		 		}
+		 		else if(newstate == "right"){
+		 			playerObject.state = new State("right");
+		 		}
+	 			break;	 		
+	 		case "left"://turn left
+		 		if(newstate === "forward") {
+		 			playerObject.state = new State("left");
+		 			PlayerMove(playerObject);		 			
+		 		}
+		 		else if(newstate === "left"){
+		 			playerObject.state = new State("back");
+		 		}
+		 		else if(newstate == "right"){
+		 			playerObject.state = new State("forward");
+		 		}
+	 		case "right"://turn right
+		 		if(newstate === "forward") {
+			 			playerObject.state = new State("right");
+			 			PlayerMove(playerObject);
+			 		}
+			 		else if(newstate === "left"){
+			 			playerObject.state = new State("forward");
+			 		}
+			 		else if(newstate == "right"){
+			 			playerObject.state = new State("back");
+			 		}
+		 		break;
+	 		default:
+	 		console.log("invalid input");	
+		}
+		
 	}
 	var getStartandEnd = function(trial){
 		var start = [1,3,5,8,9,7,3,2];
@@ -40,15 +82,14 @@ var fsmMain = function fsmMain (states) {
 	}	
 	function play(program){
 		var firstState = new State("forward");	
-		var gameObject = new player(0);
-		gameObject.Position = startandend.start;
-		var theGameMaze = new Array(10);
-		for(var i=0;i<10;i+=1){
-			theGameMaze[i] = new Array(states);
-		}	
+		var gameObject = new player(states);
+		gameObject.Position = startandend.start;		
+		console.log(gameObject.Position);
 		for(var i=0;i<program.length;i++){
-			StateChange(program[i],gameObject);
-			PlayerMove(gameObject);
+			console.log("cuurent state "+gameObject.state.get_movement());			
+			console.log("instruction "+program[i]);	
+			StateChange(program[i],gameObject);			
+			console.log("new state "+gameObject.state.get_movement());			
 			console.log(gameObject.Position);
 		}
 		console.log(startandend);
