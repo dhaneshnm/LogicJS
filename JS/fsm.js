@@ -1,35 +1,30 @@
 var fsmMain = function fsmMain (states) {
-// body...
 	function State(towhere){
-	this.movement = towhere;	
+		this.movement = towhere;	
 	}
-	State.prototype.get_movement = function() {
-		// body...
+	State.prototype.get_movement = function() {		
 		return this.movement;
-	};
-	
+	};	
 	function player(currentPosition){
-	this.Position = currentPosition;
-	this.state = new State("forward");
+		this.Position = currentPosition;
+		this.state = new State("forward");
 	}
-
-	var PlayerMove = function PlayerMove(playerObject){
-	//dictates rules on the game object can move from one box to another.
+	var PlayerMove = function PlayerMove(playerObject){	
  		switch(playerObject.state.get_movement()){
  		case "forward"://move  forward
- 		playerObject.Position = playerObject.Position+states; 		 		
- 		break;
+ 			playerObject.Position = playerObject.Position+states; 		 		
+ 			break;
  		case "back"://move  forward
- 		playerObject.Position = playerObject.Position-states; 		 		
- 		break;
+ 			playerObject.Position = playerObject.Position-states; 		 		
+ 			break;
  		case "left"://turn left
- 		playerObject.Position = playerObject.Position+1;
- 		break;
+ 			playerObject.Position = playerObject.Position+1; 			
+ 			break;
  		case "right"://turn right
- 		playerObject.Position = playerObject.Position-1;
- 		break;
- 		default:
- 		console.log("invalid input");
+	 		playerObject.Position = playerObject.Position-1;
+	 		break;
+	 	default:
+	 		console.log("invalid input");
  		};
 	}	
 	var StateChange = function StateChange(newstate,playerObject){
@@ -49,7 +44,7 @@ var fsmMain = function fsmMain (states) {
 	 		case "left"://turn left
 		 		if(newstate === "forward") {
 		 			playerObject.state = new State("left");
-		 			PlayerMove(playerObject);		 			
+		 			PlayerMove(playerObject);		 					 			
 		 		}
 		 		else if(newstate === "left"){
 		 			playerObject.state = new State("back");
@@ -57,6 +52,7 @@ var fsmMain = function fsmMain (states) {
 		 		else if(newstate == "right"){
 		 			playerObject.state = new State("forward");
 		 		}
+		 		break;
 	 		case "right"://turn right
 		 		if(newstate === "forward") {
 			 			playerObject.state = new State("right");
@@ -83,19 +79,14 @@ var fsmMain = function fsmMain (states) {
 	function play(program){
 		var firstState = new State("forward");	
 		var gameObject = new player(states);
-		gameObject.Position = startandend.start;		
-		console.log(gameObject.Position);
+		gameObject.Position = startandend.start;				
 		for(var i=0;i<program.length;i++){
-			console.log("cuurent state "+gameObject.state.get_movement());			
-			console.log("instruction "+program[i]);	
-			StateChange(program[i],gameObject);			
-			console.log("new state "+gameObject.state.get_movement());			
-			console.log(gameObject.Position);
+			StateChange(program[i],gameObject);						
 		}
 		console.log(startandend);
-
+		console.log(gameObject.state.get_movement());
+		console.log(gameObject.Position);
 	}
-
 	var startandend = getStartandEnd(0);
 	program =["left","forward"];
 	play(program);
