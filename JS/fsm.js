@@ -71,8 +71,8 @@ var fsmMain = function fsmMain (states) {
 		
 	}
 	var getStartandEnd = function(trial){
-		var start = [1,3,5,8,9,7,3,2];
-		var end =[2,6,3,7,9,1,5,3];
+		var start = [1,3,5,5,1,7,3,2];
+		var end =[2,6,3,7,28,1,5,3];
 		var startandEnd ={"start":start[trial],"end":end[trial]};
 		return startandEnd;
 	}	
@@ -83,15 +83,18 @@ var fsmMain = function fsmMain (states) {
 		for(var i=0;i<program.length;i++){
 			StateChange(program[i],gameObject);						
 		}
-		console.log(startandend);
+		console.log(startandend.end);
 		console.log(gameObject.state.get_movement());
 		console.log(gameObject.Position);
+		if(startandend.end === gameObject.Position){
+			console.log("won");
+		}
+		else{
+			console.log("lost");
+		}
 	}
-	var startandend = getStartandEnd(0);
-	program =["left","forward"];
+	var startandend = getStartandEnd(4);
+	program =["forward","left","forward","right","forward","left","forward","forward","forward","forward","forward","forward"];
 	play(program);
 }
-fsmMain(10);
-
-
-
+fsmMain(10);	
