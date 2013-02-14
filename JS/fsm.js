@@ -37,7 +37,7 @@ var fsmMain = function fsmMain (states) {
 		 		else if(newstate === "left"){
 		 			playerObject.state = new State("left");
 		 		}
-		 		else if(newstate == "right"){
+		 		else if(newstate === "right"){
 		 			playerObject.state = new State("right");
 		 		}
 	 			break;	 		
