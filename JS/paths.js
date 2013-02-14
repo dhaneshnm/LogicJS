@@ -20,28 +20,57 @@ function paths(map,startandend,program,result) {
 		var temp_node = new node(start_node.row_number,start_node.column_number+1);
 		temp_node.G = start_node.G + 10;
 		temp_node.H = get_H(map,temp_node);
+		temp_node.parent = start_node;
 		openlist.push(temp_node);
 	}
 	if(map[start_node.row_number][start_node.column_number-1] === 0){
-		
+		var temp_node = new node(start_node.row_number,start_node.column_number+1);
+		temp_node.G = start_node.G + 10;
+		temp_node.H = get_H(map,temp_node);
+		temp_node.parent = start_node;
+		openlist.push(temp_node);	
 	}
 	if(map[start_node.row_number+1][start_node.column_number+1] === 0){
-		
+		var temp_node = new node(start_node.row_number,start_node.column_number+1);
+		temp_node.G = start_node.G + 10;
+		temp_node.H = get_H(map,temp_node);
+		temp_node.parent = start_node;
+		openlist.push(temp_node);
 	}
 	if(map[start_node.row_number+1][start_node.column_number] === 0){
-		
+		var temp_node = new node(start_node.row_number,start_node.column_number+1);
+		temp_node.G = start_node.G + 10;
+		temp_node.H = get_H(map,temp_node);
+		temp_node.parent = start_node;
+		openlist.push(temp_node);
 	}
 	if(map[start_node.row_number+1][start_node.column_number-1] === 0){
-		
+		var temp_node = new node(start_node.row_number,start_node.column_number+1);
+		temp_node.G = start_node.G + 10;
+		temp_node.H = get_H(map,temp_node);
+		temp_node.parent = start_node;
+		openlist.push(temp_node);
 	}
 	if(map[start_node.row_number-1][start_node.column_number+1] === 0){
-		
+		var temp_node = new node(start_node.row_number,start_node.column_number+1);
+		temp_node.G = start_node.G + 10;
+		temp_node.H = get_H(map,temp_node);
+		temp_node.parent = start_node;
+		openlist.push(temp_node);
 	}
 	if(map[start_node.row_number-1][start_node.column_number] === 0){
-		
+		var temp_node = new node(start_node.row_number,start_node.column_number+1);
+		temp_node.G = start_node.G + 10;
+		temp_node.H = get_H(map,temp_node);
+		temp_node.parent = start_node;
+		openlist.push(temp_node);
 	}
 	if(map[start_node.row_number-1][start_node.column_number-1] === 0){
-		
+		var temp_node = new node(start_node.row_number,start_node.column_number+1);
+		temp_node.G = start_node.G + 10;
+		temp_node.H = get_H(map,temp_node);
+		temp_node.parent = start_node;
+		openlist.push(temp_node);
 	}
 
 }
