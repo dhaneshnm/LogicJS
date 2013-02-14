@@ -8,7 +8,9 @@ function paths(map,startandend,program,result) {
 		var H = 0;
 	}
 	var get_H = function get_H(map,temp_node){
-		return 0;
+		var end_row = startandend.end/10;
+		var end_column = startandend.end%10;
+		return ((end_column -temp_node.column_number)+(end.node -temp_node.row_number));
 	}
 	var findNextNode = function findNextNode(openlist){
 		return openlist[0];//wrong logic,but will change it soon
