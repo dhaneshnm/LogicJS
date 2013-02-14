@@ -97,4 +97,4 @@ var fsmMain = function fsmMain (states) {
 	program =["forward","left","forward","right","forward","left","forward","forward","forward","forward","forward","forward"];
 	play(program);
 }
-fsmMain(10);	
+	

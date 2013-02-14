@@ -116,7 +116,7 @@ function has(el, propList) {
     }
 }
 
-function initBrowserSpecific() {
+function initBrowserSpecific() {   
     sjs.tproperty = has(doc.body.style, [
         'transform',
         'webkitTransform',
