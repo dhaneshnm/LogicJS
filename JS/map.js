@@ -6,5 +6,18 @@ var generate_map = function generate_map(level){
 			Map[i][j] = 0;
 		};
 	};
+	switch(level){
+		case 1:
+			break;			
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		default:
+		    break;	
+
+	};
 	return Map;
 }
