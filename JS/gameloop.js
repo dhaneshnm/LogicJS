@@ -13,7 +13,9 @@ var gameloop = function gameloop() {
 	//9.on replay,repeat gameloop.
 }
 function RenderUI(){
-	var scene = sjs.Scene({w:640, h:480});	
+	var scene = sjs.Scene({w:640, h:480});
+	var foreground = scene.Layer("foreground");
+	var player = scene.Sprite("images/thief.GIF", foreground);
 
 }
 gameloop();
