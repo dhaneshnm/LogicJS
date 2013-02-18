@@ -25,6 +25,7 @@ function RenderUI(){
 	    // create the Sprite object;
 	    var playerLayer = scene.Layer("forground");
 	    var sp = scene.Sprite('images/thief.GIF',{layer:playerLayer, color:"blue"});
+	    sp.size(50,50);
 	    // change the visible size of the sprite
 	    //sp.size(175,175);
 	    // apply the latest visual changes to the sprite
@@ -34,7 +35,8 @@ function RenderUI(){
 	    // (this works the opposite way of a CSS background)
 	    //sp.offset(0, 0);
 	    // various transformations
-	    sp.move(150,0);
+	    var unitblock = 50;
+	    sp.move(unitblock*6,0);
 	    //sp.rotate(3.14 / 4);
 	    //sp.scale(2);
 	    //sp.setOpacity(0.8);
