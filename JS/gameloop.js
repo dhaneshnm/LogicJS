@@ -39,12 +39,12 @@ function RenderUI(){
 		var foreground = scene.Layer("background");
 		var player = scene.Sprite('images/thief.GIF',{layer:foreground,color:"grey"});
 		player.size(30,40);
-		player.move(50,0);
+		//player.move(50,0);
 		player.update();
 		current_player = new game_player(0,player);
-		console.log(current_player.state.get_movement());
+		//console.log(current_player.state.get_movement());
 		console.log(current_player.spriteObj);
-		setTimeout(function(){playermove(100,0,player);},3000);	   
+		//setTimeout(function(){playermove(100,0,player);},3000);	   
 	});
 }
 

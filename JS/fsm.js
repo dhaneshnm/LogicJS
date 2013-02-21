@@ -3,23 +3,19 @@
  		switch(playerObject.state.get_movement()){
  		case "forward"://move  forward
  			playerObject.Position = playerObject.Position+states;
- 			playerObject.spriteObj.move(250,100); 		 		
- 			playerObject.spriteObj.update();
+ 			updatemotion(playerObject);	
  			break;
  		case "back"://move  forward
  			playerObject.Position = playerObject.Position-states; 		 		
- 			playerObject.spriteObj.move(250,100); 		 		
- 			playerObject.spriteObj.update();
+ 			updatemotion(playerObject);
  			break;
  		case "left"://turn left
  			playerObject.Position = playerObject.Position+1; 			
- 			playerObject.spriteObj.move(250,100); 		 		
- 			playerObject.spriteObj.update();
+ 			updatemotion(playerObject);
  			break;
  		case "right"://turn right
 	 		playerObject.Position = playerObject.Position-1;
-	 		playerObject.spriteObj.move(250,100); 		 		
- 			playerObject.spriteObj.update();
+	 		updatemotion(playerObject);
 	 		break;
 	 	default:
 	 		console.log("invalid input");
@@ -81,3 +77,10 @@ function State(towhere){
 	State.prototype.get_movement = function() {		
 		return this.movement;
 	};	
+function updatemotion(playerObject){
+	var y = playerObject.Position/states;
+ 	var x = playerObject.Position%states;
+ 	console.log(x+"booyaa"+y);
+ 	playerObject.spriteObj.move(y*50,x*50); 		 		
+ 	playerObject.spriteObj.update();
+}
