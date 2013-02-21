@@ -2,16 +2,24 @@
 	function PlayerMove(playerObject){	
  		switch(playerObject.state.get_movement()){
  		case "forward"://move  forward
- 			playerObject.Position = playerObject.Position+states; 		 		
+ 			playerObject.Position = playerObject.Position+states;
+ 			playerObject.spriteObj.move(250,100); 		 		
+ 			playerObject.spriteObj.update();
  			break;
  		case "back"://move  forward
  			playerObject.Position = playerObject.Position-states; 		 		
+ 			playerObject.spriteObj.move(250,100); 		 		
+ 			playerObject.spriteObj.update();
  			break;
  		case "left"://turn left
  			playerObject.Position = playerObject.Position+1; 			
+ 			playerObject.spriteObj.move(250,100); 		 		
+ 			playerObject.spriteObj.update();
  			break;
  		case "right"://turn right
 	 		playerObject.Position = playerObject.Position-1;
+	 		playerObject.spriteObj.move(250,100); 		 		
+ 			playerObject.spriteObj.update();
 	 		break;
 	 	default:
 	 		console.log("invalid input");
@@ -61,10 +69,10 @@
 		
 	}	
 	
-function player(currentPosition,spr){
+function game_player(currentPosition,spr){
 		this.Position = currentPosition;
 		this.state = new State("forward");
-		this.sprtrObj = spr;
+		this.spriteObj = spr;
 	}	
 
 function State(towhere){

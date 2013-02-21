@@ -18,6 +18,7 @@ $("#go_button").click(function(){
 		var program = simpleParse(code);
 		console.log(program[0]);
 		console.log(current_player.state.get_movement());
+		StateChange(program[0],current_player);
 	});
 });
 function simpleParse(code){
