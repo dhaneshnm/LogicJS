@@ -19,30 +19,22 @@ function RenderUI(){
 	// ready, the callback function is called.
 	scene.loadImages(['images/thief.GIF','images/Rocks.png'], function() {
 		var meshlayer = scene.Layer("background");
-		var mesh1 = scene.Sprite('images/Rocks.png', {layer:meshlayer, color:"#c0c0c0"});
-		mesh1.size(50,50);
-		mesh1.update();
-		var mesh2 = scene.Sprite('images/Rocks.png', {layer:meshlayer, color:"#c0c0c0"});
-		var unitblock = 50;
-	    mesh2.move(unitblock*2,0);
-		mesh2.size(50,50);
-		mesh2.update();
-	    // create the Sprite object;
-	    var playerLayer = scene.Layer("forground");
-	    var sp = scene.Sprite('images/thief.GIF',playerLayer);
-	    sp.size(50,50);	    
-	    // apply the latest visual changes to the sprite
-	    // (draw if canvas, update attribute if DOM);
-	    sp.update();
-	    // change the offset of the image in the sprite
-	    // (this works the opposite way of a CSS background)
-	    //sp.offset(0, 0);
-	    // various transformations	    
-	    sp.move(unitblock*6,0);
-	    //sp.rotate(3.14 / 4);
-	    //sp.scale(2);
-	    sp.setOpacity(0.8);
-	    sp.update();
+		var mesh = scene.Sprite(false, {layer:meshlayer, color:"Blue"});
+		mesh.size(450,450);
+		mesh.update();
+		var uniBlock = 50;
+		var meshArray = new Array(9);
+		for(var	 j=0;j<9;j++){
+			var blockarray = new Array(10);
+			for(var i=0;i<9;i++){				
+				blockarray[i] = scene.Sprite('images/Rocks.png', {layer:meshlayer, color:"#c0c0c0"});
+				blockarray[i].size(49,49);
+				blockarray[i].move(uniBlock*i,uniBlock*j);
+				blockarray[i].update();		
+			}
+			meshArray.push(blockarray);
+		}		
+	   
 	});
 }
 gameloop();
