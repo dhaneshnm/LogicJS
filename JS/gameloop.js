@@ -33,8 +33,17 @@ function RenderUI(){
 				blockarray[i].update();		
 			}
 			meshArray.push(blockarray);
-		}		
-	   
+		}	
+		var foreground = scene.Layer("background");
+		var player = scene.Sprite('images/thief.GIF',{layer:foreground,color:"grey"});
+		player.size(30,40);
+		player.move(50,0);
+		player.update();
+		setTimeout(function(){playermove(100,0,player);},3000);	   
 	});
+}
+function playermove(x,y,player){
+	player.move(x,y);
+	player.update();
 }
 gameloop();
