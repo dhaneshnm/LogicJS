@@ -24,10 +24,8 @@ function RenderUI(){
 		mesh.update();
 	    // create the Sprite object;
 	    var playerLayer = scene.Layer("forground");
-	    var sp = scene.Sprite('images/thief.GIF',{layer:playerLayer, color:"blue"});
-	    sp.size(50,50);
-	    // change the visible size of the sprite
-	    //sp.size(175,175);
+	    var sp = scene.Sprite('images/thief.GIF',playerLayer);
+	    sp.size(50,50);	    
 	    // apply the latest visual changes to the sprite
 	    // (draw if canvas, update attribute if DOM);
 	    sp.update();
@@ -39,11 +37,8 @@ function RenderUI(){
 	    sp.move(unitblock*6,0);
 	    //sp.rotate(3.14 / 4);
 	    //sp.scale(2);
-	    //sp.setOpacity(0.8);
-
+	    sp.setOpacity(0.8);
 	    sp.update();
 	});
-
-
 }
 gameloop();
