@@ -12,14 +12,21 @@
 <script type="text/javascript" src="JS/gameloop.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){	
-$("#go_button").click(function(){
-		console.log($("#code_window")[0].innerText);
+$("#go_button").click(function(){		
+		var code = $("#code_window")[0].innerText;
+		console.log(code);
+		var program = simpleParse(code);
+		console.log(program[0]);
 	});
 });
+function simpleParse(code){
+	var program = code.split(";");
+	return program;
+}
 </script>
 <div style ="margin-top:0px;position:absolute;width:200px;height:200px;" >
 <div id ="code_window" contenteditable="true">
-	//tyep your code here
+	//type your code here
 </div>
 <BUTTON id="go_button">go</BUTTON>
 </div>
