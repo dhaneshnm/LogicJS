@@ -11,6 +11,7 @@ var gameloop = function gameloop() {
 	//7.If score is above 8,player repeat game loop for next level.
 	//8.if score less than at,wait player to hit "replay".
 	//9.on replay,repeat gameloop.
+
 }
 function RenderUI(){
 	var scene = sjs.Scene({w:640, h:480});

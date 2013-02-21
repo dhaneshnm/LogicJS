@@ -4,14 +4,24 @@
 <H1>Welcome to LogicJS test page</H1>
 </head>
 <body>
+<script type="text/javascript" src="JS/jquery-1.9.1.min.js"></script>	
 <script type="text/javascript" src="JS/paths.js"></script>
 <script type="text/javascript" src="JS/map.js"></script>
 <script type="text/javascript" src="JS/sprite.js"></script>
 <script type="text/javascript" src="JS/fsm.js"></script>
 <script type="text/javascript" src="JS/gameloop.js"></script>
-<div style ="margin-top:0px;position:absolute">
-<textarea contenteditable="true" style="margin-left:680px;marign-top:10px!;height:300px;width:400px"></textarea>
-<BUTTON>go</BUTTON>
+<script type="text/javascript">
+$(document).ready(function(){	
+$("#go_button").click(function(){
+		console.log($("#code_window")[0].innerText);
+	});
+});
+</script>
+<div style ="margin-top:0px;position:absolute;width:200px;height:200px;" >
+<div id ="code_window" contenteditable="true">
+	//tyep your code here
+</div>
+<BUTTON id="go_button">go</BUTTON>
 </div>
 
 
