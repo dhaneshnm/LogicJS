@@ -4,7 +4,8 @@ var gameloop = function gameloop() {
 	RenderUI();	
 	//2.Wait for user to hit "go".
 	//3.Pass user program to execute module,ie call execute module.
-	fsmMain(10);
+	current_player = new player(0,playerGlobal);
+	console.log(current_player.state.get_movement());
 	//4.execute module runs the simulation and returns result.
 	//5.Incvoke AI module and pass the result.
 	//6.AI module computes all possible paths and computes the user score.	
@@ -13,6 +14,8 @@ var gameloop = function gameloop() {
 	//9.on replay,repeat gameloop.
 
 }
+var playerGlobal;
+var current_player;
 function RenderUI(){
 	var scene = sjs.Scene({w:640, h:480});
 
@@ -40,9 +43,11 @@ function RenderUI(){
 		player.size(30,40);
 		player.move(50,0);
 		player.update();
+		playerGlobal = player;
 		setTimeout(function(){playermove(100,0,player);},3000);	   
 	});
 }
+
 function playermove(x,y,player){
 	player.move(x,y);
 	player.update();

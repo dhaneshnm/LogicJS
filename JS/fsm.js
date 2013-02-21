@@ -1,15 +1,5 @@
-var fsmMain = function fsmMain (states) {
-	function State(towhere){
-		this.movement = towhere;	
-	}
-	State.prototype.get_movement = function() {		
-		return this.movement;
-	};	
-	function player(currentPosition){
-		this.Position = currentPosition;
-		this.state = new State("forward");
-	}
-	var PlayerMove = function PlayerMove(playerObject){	
+ var states = 9;
+	function PlayerMove(playerObject){	
  		switch(playerObject.state.get_movement()){
  		case "forward"://move  forward
  			playerObject.Position = playerObject.Position+states; 		 		
@@ -27,7 +17,7 @@ var fsmMain = function fsmMain (states) {
 	 		console.log("invalid input");
  		};
 	}	
-	var StateChange = function StateChange(newstate,playerObject){
+	function StateChange(newstate,playerObject){
 		switch(playerObject.state.get_movement()){
 			case "forward"://move  forward
 		 		if(newstate === "forward") {
@@ -69,32 +59,17 @@ var fsmMain = function fsmMain (states) {
 	 		console.log("invalid input");	
 		}
 		
-	}
-	var getStartandEnd = function(trial){
-		var start = [1,3,5,5,1,7,3,2];
-		var end =[2,6,3,7,28,1,5,3];
-		var startandEnd ={"start":start[trial],"end":end[trial]};
-		return startandEnd;
 	}	
-	function play(program){
-		var firstState = new State("forward");	
-		var gameObject = new player(states);
-		gameObject.Position = startandend.start;				
-		for(var i=0;i<program.length;i++){
-			StateChange(program[i],gameObject);						
-		}
-		console.log(startandend.end);
-		console.log(gameObject.state.get_movement());
-		console.log(gameObject.Position);
-		if(startandend.end === gameObject.Position){
-			console.log("won");
-		}
-		else{
-			console.log("lost");
-		}
-	}
-	var startandend = getStartandEnd(4);
-	program =["forward","left","forward","right","forward","left","forward","forward","forward","forward","forward","forward"];
-	play(program);
-}
 	
+function player(currentPosition,spr){
+		this.Position = currentPosition;
+		this.state = new State("forward");
+		this.sprtrObj = spr;
+	}	
+
+function State(towhere){
+		this.movement = towhere;	
+	}
+	State.prototype.get_movement = function() {		
+		return this.movement;
+	};	
