@@ -18,12 +18,12 @@
 	 		updatemotion(playerObject);
 	 		break;
 	 	default:
-	 		console.log("invalid input");
+	 		console.log("invalid input for PlayerMove by "+playerObject.state.get_movement());
  		};
 	}	
 	function StateChange(newstate,playerObject){
 		switch(playerObject.state.get_movement()){
-			case "forward"://move  forward
+			case "forward":
 		 		if(newstate === "forward") {
 		 			playerObject.state = new State("forward");
 		 			PlayerMove(playerObject);
@@ -35,7 +35,7 @@
 		 			playerObject.state = new State("right");
 		 		}
 	 			break;	 		
-	 		case "left"://turn left
+	 		case "left":
 		 		if(newstate === "forward") {
 		 			playerObject.state = new State("left");
 		 			PlayerMove(playerObject);		 					 			
@@ -47,7 +47,7 @@
 		 			playerObject.state = new State("forward");
 		 		}
 		 		break;
-	 		case "right"://turn right
+	 		case "right":
 		 		if(newstate === "forward") {
 			 			playerObject.state = new State("right");
 			 			PlayerMove(playerObject);
@@ -59,8 +59,20 @@
 			 			playerObject.state = new State("back");
 			 		}
 		 		break;
-	 		default:
-	 		console.log("invalid input");	
+	 		case "back"://turn right
+		 		if(newstate === "forward") {
+			 			playerObject.state = new State("back");
+			 			PlayerMove(playerObject);
+			 		}
+			 		else if(newstate === "left"){
+			 			playerObject.state = new State("right");
+			 		}
+			 		else if(newstate == "right"){
+			 			playerObject.state = new State("left");
+			 		}
+		 		break;
+	 		default:	 		
+	 		console.log("invalid input for StateChange by "+playerObject.state.get_movement());	
 		}
 		
 	}	
