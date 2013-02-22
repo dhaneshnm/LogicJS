@@ -16,7 +16,6 @@ var gameloop = function gameloop() {
 var current_player;
 function RenderUI(){
 	var scene = sjs.Scene({w:640, h:480});
-
 	// load the images in parallel. When all the images are
 	// ready, the callback function is called.
 	scene.loadImages(['images/man.gif','images/Rocks.png'], function() {
@@ -46,10 +45,5 @@ function RenderUI(){
 		console.log(current_player.spriteObj);
 		//setTimeout(function(){playermove(100,0,player);},3000);	   
 	});
-}
-
-function playermove(x,y,player){
-	player.move(x,y);
-	player.update();
 }
 gameloop();
