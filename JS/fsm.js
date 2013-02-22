@@ -73,16 +73,13 @@
 		 		break;
 	 		default:	 		
 	 		console.log("invalid input for StateChange by "+playerObject.state.get_movement());	
-		}
-		
-	}	
-	
+		}		
+	}		
 function game_player(currentPosition,spr){
 		this.Position = currentPosition;
 		this.state = new State("forward");
 		this.spriteObj = spr;
 	}	
-
 function State(towhere){
 		this.movement = towhere;	
 	}
@@ -93,6 +90,6 @@ function updatemotion(playerObject){
 	var x = Math.floor(playerObject.Position/states);
  	var y = Math.floor(playerObject.Position%states);
  	console.log(x+"booyaa"+y);
- 	playerObject.spriteObj.move(y*50,x*50); 		 		
+ 	playerObject.spriteObj.position(y*50,x*50); 		 		
  	playerObject.spriteObj.update();
 }
