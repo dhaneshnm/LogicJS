@@ -19,7 +19,7 @@ function RenderUI(){
 
 	// load the images in parallel. When all the images are
 	// ready, the callback function is called.
-	scene.loadImages(['images/thief.GIF','images/Rocks.png'], function() {
+	scene.loadImages(['images/man.gif','images/Rocks.png'], function() {
 		var meshlayer = scene.Layer("background");
 		var mesh = scene.Sprite(false, {layer:meshlayer, color:"Blue"});
 		mesh.size(450,450);
@@ -37,7 +37,7 @@ function RenderUI(){
 			meshArray.push(blockarray);
 		}	
 		var foreground = scene.Layer("background");
-		var player = scene.Sprite('images/thief.GIF',{layer:foreground,color:"grey"});
+		var player = scene.Sprite('images/man.gif',{layer:foreground,color:"grey"});
 		player.size(30,40);
 		//player.move(50,0);
 		player.update();
