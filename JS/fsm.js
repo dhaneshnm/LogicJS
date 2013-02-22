@@ -90,8 +90,8 @@ function State(towhere){
 		return this.movement;
 	};	
 function updatemotion(playerObject){
-	var y = playerObject.Position/states;
- 	var x = playerObject.Position%states;
+	var x = playerObject.Position/states;
+ 	var y = playerObject.Position%states;
  	console.log(x+"booyaa"+y);
  	playerObject.spriteObj.move(y*50,x*50); 		 		
  	playerObject.spriteObj.update();
