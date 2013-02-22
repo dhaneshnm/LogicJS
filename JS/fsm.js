@@ -90,6 +90,10 @@ function updatemotion(playerObject){
 	var x = Math.floor(playerObject.Position/states);
  	var y = Math.floor(playerObject.Position%states);
  	console.log(x+"booyaa"+y);
- 	playerObject.spriteObj.position(y*50,x*50); 		 		
+ 	playerObject.spriteObj.position(y*5,x*5); 		 		
  	playerObject.spriteObj.update();
-}
+ 	playerObject.spriteObj.position(y*5*2,x*5*2); 		 		
+ 	playerObject.spriteObj.update();
+ 	playerObject.spriteObj.position(y*5*5*2,x*5*5*2); 		 		
+ 	playerObject.spriteObj.update();
+ 	}
