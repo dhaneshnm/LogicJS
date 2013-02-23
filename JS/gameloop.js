@@ -3,7 +3,7 @@ var gameloop = function gameloop() {
 	//1.render UI on canvass.
 	var map = generate_map(1);
 	console.log(map[1][8]);
-	RenderUI();	
+	RenderUI(map);	
 	//2.Wait for user to hit "go".
 	//3.Pass user program to execute module,ie call execute module.	
 	//4.execute module runs the simulation and returns result.
@@ -14,11 +14,11 @@ var gameloop = function gameloop() {
 	//9.on replay,repeat gameloop.
 }
 var current_player;
-function RenderUI(){
+function RenderUI(maparray){
 	var scene = sjs.Scene({w:640, h:480});
 	// load the images in parallel. When all the images are
 	// ready, the callback function is called.
-	scene.loadImages(['images/man.gif','images/Rocks.png'], function() {
+	scene.loadImages(['images/man.gif','images/Rocks.png','images/Dirts.png',], function() {
 		var meshlayer = scene.Layer("background");
 		var mesh = scene.Sprite(false, {layer:meshlayer, color:"Blue"});
 		mesh.size(450,450);
@@ -27,8 +27,13 @@ function RenderUI(){
 		var meshArray = new Array(9);
 		for(var	 j=0;j<9;j++){
 			var blockarray = new Array(10);
-			for(var i=0;i<9;i++){				
-				blockarray[i] = scene.Sprite('images/Rocks.png', {layer:meshlayer, color:"#c0c0c0"});
+			for(var i=0;i<9;i++){
+				if(maparray[i][j] == 0){
+					blockarray[i] = scene.Sprite('images/Rocks.png', {layer:meshlayer, color:"#c0c0c0"});
+				}
+				else{
+					blockarray[i] = scene.Sprite('images/Dirts.png', {layer:meshlayer, color:"#c0c0c0"});	
+				}	
 				blockarray[i].size(49,49);
 				blockarray[i].move(uniBlock*i,uniBlock*j);
 				blockarray[i].update();		
