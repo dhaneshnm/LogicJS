@@ -90,6 +90,10 @@ function updatemotion(playerObject){
 	var x = Math.floor(playerObject.Position/states);
  	var y = Math.floor(playerObject.Position%states);
  	console.log(x+"booyaa"+y);
+ 	if(map[x][y] == 1){
+ 		console.log("bad move");
+ 		return;
+ 	}
  	playerObject.spriteObj.position(y*5,x*5); 		 		
  	playerObject.spriteObj.update();
  	playerObject.spriteObj.position(y*5*2,x*5*2); 		 		

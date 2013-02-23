@@ -1,7 +1,8 @@
-
+var current_player;
+var map;
 var gameloop = function gameloop() {
 	//1.render UI on canvass.
-	var map = generate_map(1);
+	map = generate_map(1);
 	console.log(map[1][8]);
 	RenderUI(map);	
 	//2.Wait for user to hit "go".
@@ -13,7 +14,6 @@ var gameloop = function gameloop() {
 	//8.if score less than at,wait player to hit "replay".
 	//9.on replay,repeat gameloop.
 }
-var current_player;
 function RenderUI(maparray){
 	var scene = sjs.Scene({w:640, h:480});
 	// load the images in parallel. When all the images are
