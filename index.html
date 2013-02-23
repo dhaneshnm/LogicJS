@@ -11,25 +11,8 @@
 <script type="text/javascript" src="JS/fsm.js"></script>
 <script type="text/javascript" src="JS/gameloop.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){	
-$("#go_button").click(function(){		
-		var code = $("#code_window")[0].innerText;
-		console.log(code);
-		var program = simpleParse(code);
-		console.log(program[0]);
-		console.log(program[1]);
-		//console.log(current_player.state.get_movement());
-		for(var i=0;i<program.length;i++){			
-			//setTimeout(function(){StateChange(program[i],current_player);},500);
-			StateChange(program[i],current_player);
-		
-		}
-	});
-});
-function simpleParse(code){
-	var program = code.split(";");
-	return program;
-}
+
+
 </script>
 <div style ="margin-top:0px;position:absolute;width:200px;height:200px;" >
 <div id ="code_window" contenteditable="true">

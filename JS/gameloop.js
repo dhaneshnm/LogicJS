@@ -48,7 +48,26 @@ function RenderUI(maparray){
 		current_player = new game_player(0,player);
 		//console.log(current_player.state.get_movement());
 		console.log(current_player.spriteObj);
-		//setTimeout(function(){playermove(100,0,player);},3000);	   
+		//setTimeout(function(){playermove(100,0,player);},3000);
+		$(document).ready(function(){	
+			$("#go_button").click(function(){		
+				var code = $("#code_window")[0].innerText;
+				console.log(code);
+				var program = simpleParse(code);
+				console.log(program[0]);
+				console.log(program[1]);
+				//console.log(current_player.state.get_movement());
+				for(var i=0;i<program.length;i++){			
+					//setTimeout(function(){StateChange(program[i],current_player);},500);
+					StateChange(program[i],current_player);
+				
+				}
 	});
+});	   
+	});
+}
+function simpleParse(code){
+	var program = code.split(";");
+	return program;
 }
 gameloop();
