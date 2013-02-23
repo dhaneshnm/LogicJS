@@ -106,7 +106,7 @@ function updatemotion(playerObject,new_position){
 
 function isValidMove(position) 	{
 	var x = Math.floor(position/states);
- 	var y = Math.floor(position%states);
+ 	var y = Math.floor(position%states); 	
  	if(map[x][y ] === 0){
  		return true;
  		}

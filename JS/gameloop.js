@@ -28,7 +28,7 @@ function RenderUI(maparray){
 		for(var	 j=0;j<9;j++){
 			var blockarray = new Array(10);
 			for(var i=0;i<9;i++){
-				if(maparray[i][j] == 0){
+				if(maparray[j][i] == 0){
 					blockarray[i] = scene.Sprite('images/Rocks.png', {layer:meshlayer, color:"#c0c0c0"});
 				}
 				else{
