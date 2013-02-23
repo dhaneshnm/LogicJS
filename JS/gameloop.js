@@ -1,17 +1,17 @@
 
 var gameloop = function gameloop() {
 	//1.render UI on canvass.
+	var map = generate_map(1);
+	console.log(map[1][8]);
 	RenderUI();	
 	//2.Wait for user to hit "go".
-	//3.Pass user program to execute module,ie call execute module.
-	
+	//3.Pass user program to execute module,ie call execute module.	
 	//4.execute module runs the simulation and returns result.
 	//5.Incvoke AI module and pass the result.
 	//6.AI module computes all possible paths and computes the user score.	
 	//7.If score is above 8,player repeat game loop for next level.
 	//8.if score less than at,wait player to hit "replay".
 	//9.on replay,repeat gameloop.
-
 }
 var current_player;
 function RenderUI(){
