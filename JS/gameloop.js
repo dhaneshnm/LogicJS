@@ -59,11 +59,10 @@ function RenderUI(maparray){
 				//console.log(current_player.state.get_movement());
 				for(var i=0;i<program.length;i++){			
 					//setTimeout(function(){StateChange(program[i],current_player);},500);
-					StateChange(program[i],current_player);
-				
+					StateChange(program[i],current_player);				
 				}
-	});
-});	   
+		});
+	  });	   
 	});
 }
 function simpleParse(code){

@@ -9,13 +9,25 @@
  			var new_position = 	playerObject.Position-states; 		 		 				 			
  			updatemotion(playerObject,new_position);	
  			break;
- 		case "left"://turn left
- 			var new_position = 	 playerObject.Position+1; 			 				 			
- 			updatemotion(playerObject,new_position);	
+ 		case "left"://turn left 			
+ 			if((playerObject.Position%states) == 8){
+ 				console.log("invalid move");
+ 				return;
+ 			}
+ 			else{
+ 				var new_position = 	 playerObject.Position+1; 			 				 			
+ 				updatemotion(playerObject,new_position);	
+ 			}
  			break;
  		case "right"://turn right
-	 		var new_position = playerObject.Position-1;	 		
-	 		updatemotion(playerObject,new_position);	
+	 		if((playerObject.Position%states) == 0){
+ 				console.log("invalid move");
+ 				return;
+ 			}
+ 			else{
+ 				var new_position = 	 playerObject.Position-1; 			 				 			
+ 				updatemotion(playerObject,new_position);	
+ 			} 		
 	 		break;
 	 	default:
 	 		console.log("invalid input for PlayerMove by "+playerObject.state.get_movement());
