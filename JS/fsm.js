@@ -1,21 +1,21 @@
  var states = 9;
 	function PlayerMove(playerObject){	
  		switch(playerObject.state.get_movement()){
- 		case "forward"://move  forward
- 			playerObject.Position = playerObject.Position+states;
- 			updatemotion(playerObject);	
+ 		case "forward"://move  forward 
+ 			var new_position = 	playerObject.Position+states;	
+ 			updatemotion(playerObject,new_position);	
  			break;
  		case "back"://move  forward
- 			playerObject.Position = playerObject.Position-states; 		 		
- 			updatemotion(playerObject);
+ 			var new_position = 	playerObject.Position-states; 		 		 				 			
+ 			updatemotion(playerObject,new_position);	
  			break;
  		case "left"://turn left
- 			playerObject.Position = playerObject.Position+1; 			
- 			updatemotion(playerObject);
+ 			var new_position = 	 playerObject.Position+1; 			 				 			
+ 			updatemotion(playerObject,new_position);	
  			break;
  		case "right"://turn right
-	 		playerObject.Position = playerObject.Position-1;
-	 		updatemotion(playerObject);
+	 		var new_position = playerObject.Position-1;	 		
+	 		updatemotion(playerObject,new_position);	
 	 		break;
 	 	default:
 	 		console.log("invalid input for PlayerMove by "+playerObject.state.get_movement());
@@ -81,23 +81,36 @@ function game_player(currentPosition,spr){
 		this.spriteObj = spr;
 	}	
 function State(towhere){
-		this.movement = towhere;	
-	}
-	State.prototype.get_movement = function() {		
+	this.movement = towhere;	
+}
+State.prototype.get_movement = function() {		
 		return this.movement;
 	};	
-function updatemotion(playerObject){
-	var x = Math.floor(playerObject.Position/states);
- 	var y = Math.floor(playerObject.Position%states);
- 	console.log(x+"booyaa"+y);
- 	if(map[x][y] == 1){
- 		console.log("bad move");
- 		return;
- 	}
- 	playerObject.spriteObj.position(y*5,x*5); 		 		
- 	playerObject.spriteObj.update();
- 	playerObject.spriteObj.position(y*5*2,x*5*2); 		 		
- 	playerObject.spriteObj.update();
- 	playerObject.spriteObj.position(y*5*5*2,x*5*5*2); 		 		
- 	playerObject.spriteObj.update();
- 	}
+function updatemotion(playerObject,new_position){
+	if(isValidMove(new_position)){
+ 		playerObject.Position = new_position;
+ 		var x = Math.floor(playerObject.Position/states);
+	 	var y = Math.floor(playerObject.Position%states);
+	 	console.log(x+"booyaa"+y); 	
+	 	playerObject.spriteObj.position(y*5,x*5); 		 		
+	 	playerObject.spriteObj.update();
+	 	playerObject.spriteObj.position(y*5*2,x*5*2); 		 		
+	 	playerObject.spriteObj.update();
+	 	playerObject.spriteObj.position(y*5*5*2,x*5*5*2); 		 		
+	 	playerObject.spriteObj.update();
+	 }
+ 	else{
+ 		console.log("invalid move")
+ 	}	
+ }
+
+function isValidMove(position) 	{
+	var x = Math.floor(position/states);
+ 	var y = Math.floor(position%states);
+ 	if(map[x][y ] === 0){
+ 		return true;
+ 		}
+ 	else{
+ 		return false;
+ 		}
+}
