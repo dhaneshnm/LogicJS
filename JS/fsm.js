@@ -36,7 +36,7 @@
 	function StateChange(newstate,playerObject){
 		switch(playerObject.state.get_movement()){
 			case "forward":
-		 		if(newstate === "forward") {
+		 		if(newstate === "move") {
 		 			playerObject.state = new State("forward");
 		 			PlayerMove(playerObject);
 		 		}
@@ -48,7 +48,7 @@
 		 		}
 	 			break;	 		
 	 		case "left":
-		 		if(newstate === "forward") {
+		 		if(newstate === "move") {
 		 			playerObject.state = new State("left");
 		 			PlayerMove(playerObject);		 					 			
 		 		}
@@ -60,7 +60,7 @@
 		 		}
 		 		break;
 	 		case "right":
-		 		if(newstate === "forward") {
+		 		if(newstate === "move") {
 			 			playerObject.state = new State("right");
 			 			PlayerMove(playerObject);
 			 		}
@@ -72,7 +72,7 @@
 			 		}
 		 		break;
 	 		case "back"://turn right
-		 		if(newstate === "forward") {
+		 		if(newstate === "move") {
 			 			playerObject.state = new State("back");
 			 			PlayerMove(playerObject);
 			 		}
