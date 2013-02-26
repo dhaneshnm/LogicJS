@@ -18,7 +18,7 @@ function RenderUI(maparray){
 	var scene = sjs.Scene({w:640, h:480});
 	// load the images in parallel. When all the images are
 	// ready, the callback function is called.
-	scene.loadImages(['images/man.gif','images/Rocks.png','images/Dirts.png',], function() {
+	scene.loadImages(['images/man.gif','images/Rocks.png','images/Dirts.png',"images/Ice-BT.png"], function() {
 		var meshlayer = scene.Layer("background");
 		var mesh = scene.Sprite(false, {layer:meshlayer, color:"Blue"});
 		mesh.size(450,450);
@@ -31,9 +31,14 @@ function RenderUI(maparray){
 				if(maparray[j][i] == 0){
 					blockarray[i] = scene.Sprite('images/Rocks.png', {layer:meshlayer, color:"#c0c0c0"});
 				}
-				else{
+				else if(maparray[j][i] == 1)
+				{
 					blockarray[i] = scene.Sprite('images/Dirts.png', {layer:meshlayer, color:"#c0c0c0"});	
 				}	
+				else
+				{
+					blockarray[i] = scene.Sprite('images/Ice-BT.png', {layer:meshlayer, color:"#c0c0c0"});	
+				}
 				blockarray[i].size(49,49);
 				blockarray[i].move(uniBlock*i,uniBlock*j);
 				blockarray[i].update();		
