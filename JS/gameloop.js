@@ -1,5 +1,6 @@
 var current_player;
 var map;
+var winning_position = 75;
 var gameloop = function gameloop() {
 	//1.render UI on canvass.
 	map = generate_map(1);

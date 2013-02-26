@@ -99,6 +99,9 @@ State.prototype.get_movement = function() {
 		return this.movement;
 	};	
 function updatemotion(playerObject,new_position){
+	if(new_position == winning_position){
+		console.log("You have arrived ..");
+	}
 	if(isValidMove(new_position)){
  		playerObject.Position = new_position;
  		var x = Math.floor(playerObject.Position/states);
@@ -119,7 +122,7 @@ function updatemotion(playerObject,new_position){
 function isValidMove(position) 	{
 	var x = Math.floor(position/states);
  	var y = Math.floor(position%states); 	
- 	if(map[x][y ] === 0){
+ 	if((map[x][y ] === 0 )||(map[x][y ] === 2)){
  		return true;
  		}
  	else{
