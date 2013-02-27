@@ -56,7 +56,7 @@ function RenderUI(maparray){
 		console.log(current_player.spriteObj);
 		//setTimeout(function(){playermove(100,0,player);},3000);
 		$(document).ready(function(){	
-			$("#go_button").click(function(){		
+			$("#code_wrapper #go_button").click(function(){		
 				var code = $("#code_window")[0].innerText;
 				console.log(code);
 				var program = simpleParse(code);
