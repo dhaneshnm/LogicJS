@@ -69,8 +69,11 @@ function RenderUI(maparray){
 					//setTimeout(function(){StateChange(program[i],current_player);},500);
 					StateChange(program[i],current_player);				
 				}
-		});
-	  });	   
+			});
+			$("#code_wrapper #reset_button").click(function(){
+				$("#code_window").val("");
+			});
+	  	});	   
 	});
 }
 function simpleParse(code){
