@@ -68,16 +68,25 @@ function RenderUI(maparray){
 			$("#code_wrapper #reset_button").click(function(){
 				$("#code_window").val("");
 			});
-			$("#code_window").keydown(function(){
-				if(event.which == 186){
-					var code = $("#code_window").val();
-					var program = simpleParse(code);
-					console.log(program.length);					
-					var line_code = program[program.length-1];
-					line_code = line_code.trim().toLowerCase();					
-					StateChange(line_code,current_player);		
-				}
+			$("#code_wrapper #navmode_add").click(function(){
+				$("#code_window").keydown(function(){
+					if(event.which == 186){
+						var code = $("#code_window").val();
+						var program = simpleParse(code);
+						console.log(program.length);					
+						var line_code = program[program.length-1];
+						line_code = line_code.trim().toLowerCase();					
+						StateChange(line_code,current_player);		
+						}
+				});
+				$(this).hide();
+				$("#code_wrapper #navmode_remove").show();
 			});
+			$("#code_wrapper #navmode_remove").click(function(){
+				$("#code_window").unbind("keydown");
+				$(this).hide();
+				$("#code_wrapper #navmode_add").show();
+			});						
 	  	});	   
 	});
 }
