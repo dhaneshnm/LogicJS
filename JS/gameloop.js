@@ -1,6 +1,11 @@
 var current_player;
 var map;
 var winning_position = 75;
+var scene;
+var left_avtar = 'images/man_left.gif';
+var right_avtar = 'images/man_right.gif';
+var straight_avtar = 'images/man_straight.gif';
+var back_avtar = 'images/man_back.gif';
 var gameloop = function gameloop() {
 	//1.render UI on canvass.
 	map = generate_map(1);
@@ -16,10 +21,10 @@ var gameloop = function gameloop() {
 	//9.on replay,repeat gameloop.
 }
 function RenderUI(maparray){
-	var scene = sjs.Scene({w:640, h:480});
+	scene = sjs.Scene({w:640, h:480});
 	// load the images in parallel. When all the images are
 	// ready, the callback function is called.
-	scene.loadImages(['images/man.gif','images/Rocks.png','images/Dirts.png',"images/Ice-BT.png"], function() {
+	scene.loadImages([left_avtar,right_avtar,straight_avtar,back_avtar,'images/Rocks.png','images/Dirts.png',"images/Ice-BT.png"], function() {
 		var meshlayer = scene.Layer("background");
 		var mesh = scene.Sprite(false, {layer:meshlayer, color:"Blue"});
 		mesh.size(450,450);
@@ -46,8 +51,9 @@ function RenderUI(maparray){
 			}
 			meshArray.push(blockarray);
 		}	
-		var foreground = scene.Layer("background");
-		var player = scene.Sprite('images/man.gif',{layer:foreground,color:"grey"});
+		
+		//var player = scene.Sprite(straight_avtar,{layer:foreground,color:"grey"});
+		var player = get_Sprite("forward");
 		player.size(30,40);
 		//player.move(50,0);
 		player.update();
@@ -74,6 +80,12 @@ function RenderUI(maparray){
 			});
 	  	});	   
 	});
+}
+var state_image_map = {"forward":straight_avtar,"back":back_avtar,"left":left_avtar,"right":right_avtar} 
+function get_Sprite(state){
+	var foreground = scene.Layer("background");
+	var player = scene.Sprite(state_image_map[state],{layer:foreground,color:"grey"});
+	return player;
 }
 function simpleParse(code){
 	var program = code.split(";");

@@ -1,5 +1,5 @@
  var states = 9;
-	function PlayerMove(playerObject){	
+	function PlayerMove(playerObject){			
  		switch(playerObject.state.get_movement()){
  		case "forward"://move  forward 
  			var new_position = 	playerObject.Position+states;	
@@ -9,7 +9,7 @@
  			var new_position = 	playerObject.Position-states; 		 		 				 			
  			updatemotion(playerObject,new_position);	
  			break;
- 		case "left"://turn left 			
+ 		case "left"://turn left 	 					
  			if((playerObject.Position%states) == 8){
  				console.log("invalid move");
  				return;
@@ -82,10 +82,12 @@
 			 		else if(newstate == "right"){
 			 			playerObject.state = new State("left");
 			 		}
+			 	
 		 		break;
 	 		default:	 		
 	 		console.log("invalid input for StateChange by "+playerObject.state.get_movement());	
-		}		
+		}
+		UpdateAvatar(playerObject);				
 	}		
 function game_player(currentPosition,spr){
 		this.Position = currentPosition;
@@ -128,4 +130,10 @@ function isValidMove(position) 	{
  	else{
  		return false;
  		}
+}
+
+function UpdateAvatar(playerObject){	
+	var newstate = playerObject.state.get_movement();
+	playerObject.spriteObj.loadImg(state_image_map[newstate]);	
+	playerObject.spriteObj.update();
 }
