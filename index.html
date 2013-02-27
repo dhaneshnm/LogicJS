@@ -2,6 +2,20 @@
 <head>
 <title>Logic JS</title>
 <H1>Welcome to LogicJS test page</H1>
+<style type="text/css">
+#code_wrapper{
+background-color: white;
+color: black;
+margin-top: -480px;
+margin-left: 500px;
+}
+#code_window{
+background-color: black;
+color: white;
+width: 300px;
+height: 300px;
+}
+</style>
 </head>
 <body>
 <script type="text/javascript" src="JS/jquery-1.9.1.min.js"></script>	
@@ -11,14 +25,13 @@
 <script type="text/javascript" src="JS/fsm.js"></script>
 <script type="text/javascript" src="JS/gameloop.js"></script>
 <script type="text/javascript">
-
-
 </script>
-<div style ="margin-top:0px;position:absolute;width:200px;height:200px;" >
+<div id="code_wrapper">
 <div id ="code_window" contenteditable="true">
 	//type your code here
 </div>
 <BUTTON id="go_button">go</BUTTON>
+<BUTTON id="reset_button">Reset</BUTTON>
 </div>
 </body>
 </html>
