@@ -57,21 +57,20 @@ function RenderUI(maparray){
 		//setTimeout(function(){playermove(100,0,player);},3000);
 		$(document).ready(function(){	
 			$("#code_wrapper #go_button").click(function(){		
-				var code = $("#code_window").val();
-				console.log(code);
-				code = code.replace(/(\r\n|\n|\r)/gm,"");
-				code = code.replace(/(\s)/gm,"");
-				var program = simpleParse(code);
-				console.log(program[0]);
-				console.log(program[1]);
-				//console.log(current_player.state.get_movement());
-				for(var i=0;i<program.length;i++){			
-					//setTimeout(function(){StateChange(program[i],current_player);},500);
-					StateChange(program[i],current_player);				
-				}
+				executeCode();
 			});
 			$("#code_wrapper #reset_button").click(function(){
 				$("#code_window").val("");
+			});
+			$("#code_window").keydown(function(){
+				if(event.which == 186){
+					var code = $("#code_window").val();
+					var program = simpleParse(code);
+					console.log(program.length);					
+					var line_code = program[program.length-1];
+					line_code = line_code.trim().toLowerCase();					
+					StateChange(line_code,current_player);		
+				}
 			});
 	  	});	   
 	});
@@ -79,5 +78,20 @@ function RenderUI(maparray){
 function simpleParse(code){
 	var program = code.split(";");
 	return program;
+}
+
+function executeCode(){
+	var code = $("#code_window").val();
+	console.log(code);
+	code = code.replace(/(\r\n|\n|\r)/gm,"");
+	code = code.replace(/(\s)/gm,"");
+	var program = simpleParse(code);
+	console.log(program[0]);
+	console.log(program[1]);
+	//console.log(current_player.state.get_movement());
+	for(var i=0;i<program.length;i++){			
+					//setTimeout(function(){StateChange(program[i],current_player);},500);
+				StateChange(program[i],current_player);				
+	}
 }
 gameloop();
