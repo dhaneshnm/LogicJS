@@ -57,8 +57,10 @@ function RenderUI(maparray){
 		//setTimeout(function(){playermove(100,0,player);},3000);
 		$(document).ready(function(){	
 			$("#code_wrapper #go_button").click(function(){		
-				var code = $("#code_window")[0].innerText;
+				var code = $("#code_window").val();
 				console.log(code);
+				code = code.replace(/(\r\n|\n|\r)/gm,"");
+				code = code.replace(/(\s)/gm,"");
 				var program = simpleParse(code);
 				console.log(program[0]);
 				console.log(program[1]);
