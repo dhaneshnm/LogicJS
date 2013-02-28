@@ -67,6 +67,7 @@ function RenderUI(maparray){
 			});
 			$("#code_wrapper #reset_button").click(function(){
 				$("#code_window").val("");
+				window.location.reload();
 			});
 			$("#code_wrapper #navmode_add").click(function(){
 				$("#code_window").keydown(function(){
