@@ -89,6 +89,22 @@
 		}
 		UpdateAvatar(playerObject);				
 	}		
+
+function interpret_move(command,playerObject){
+	//code for "repeat instruction"
+	if(command.indexOf("repeat")>-1){
+		var ins = command.split("(");
+		var params = ins[1].split(",");
+		var repeat_times = parseInt(params[1]);
+		var move = params[0];
+		for (var i = 0; i < repeat_times; i++) {
+			StateChange(move,playerObject);	
+		};		
+	}
+	else{
+		StateChange(command,playerObject);
+	}
+}	
 function game_player(currentPosition,spr){
 		this.Position = currentPosition;
 		this.state = new State("forward");
@@ -100,10 +116,7 @@ function State(towhere){
 State.prototype.get_movement = function() {		
 		return this.movement;
 	};	
-function updatemotion(playerObject,new_position){
-	if(new_position == winning_position){
-		console.log("You have arrived ..");
-	}
+function updatemotion(playerObject,new_position){	
 	if(isValidMove(new_position)){
  		playerObject.Position = new_position;
  		var x = Math.floor(playerObject.Position/states);
@@ -118,7 +131,12 @@ function updatemotion(playerObject,new_position){
 	 }
  	else{
  		console.log("invalid move")
- 	}	
+ 	}
+ 	if(new_position == winning_position){
+		console.log("You have arrived ..");
+		alert("you won.you are awesome!!!");
+		window.location.reload();
+	}	
  }
 
 function isValidMove(position) 	{

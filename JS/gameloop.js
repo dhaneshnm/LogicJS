@@ -8,8 +8,7 @@ var straight_avtar = 'images/man_straight.gif';
 var back_avtar = 'images/man_back.gif';
 var gameloop = function gameloop() {
 	//1.render UI on canvass.
-	map = generate_map(1);
-	console.log(map[1][8]);
+	map = generate_map(1);	
 	RenderUI(map);	
 	//2.Wait for user to hit "go".
 	//3.Pass user program to execute module,ie call execute module.	
@@ -54,7 +53,7 @@ function RenderUI(maparray){
 		
 		//var player = scene.Sprite(straight_avtar,{layer:foreground,color:"grey"});
 		var player = get_Sprite("forward");
-		player.size(30,40);
+		player.size(32,34);
 		//player.move(50,0);
 		player.update();
 		current_player = new game_player(0,player);
@@ -72,13 +71,8 @@ function RenderUI(maparray){
 			$("#code_wrapper #navmode_add").click(function(){
 				$("#code_window").keydown(function(){
 					if(event.which == 186){
-						var code = $("#code_window").val();
-						var program = simpleParse(code);
-						console.log(program.length);					
-						var line_code = program[program.length-1];
-						line_code = line_code.trim().toLowerCase();					
-						StateChange(line_code,current_player);		
-						}
+						execute_line();
+					}
 				});
 				$(this).hide();
 				$("#code_wrapper #navmode_remove").show();
@@ -94,7 +88,7 @@ function RenderUI(maparray){
 var state_image_map = {"forward":straight_avtar,"back":back_avtar,"left":left_avtar,"right":right_avtar} 
 function get_Sprite(state){
 	var foreground = scene.Layer("background");
-	var player = scene.Sprite(state_image_map[state],{layer:foreground,color:"grey"});
+	var player = scene.Sprite(state_image_map[state],{layer:foreground,color:"grey"});	
 	return player;
 }
 function simpleParse(code){
@@ -113,7 +107,16 @@ function executeCode(){
 	//console.log(current_player.state.get_movement());
 	for(var i=0;i<program.length;i++){			
 					//setTimeout(function(){StateChange(program[i],current_player);},500);
-				StateChange(program[i],current_player);				
+				interpret_move(program[i],current_player);				
 	}
 }
+function execute_line(){
+	var code = $("#code_window").val();
+	var program = simpleParse(code);
+	console.log(program.length);					
+	var line_code = program[program.length-1];
+	line_code = line_code.trim().toLowerCase();
+	interpret_move(line_code,current_player);		
+}
+
 gameloop();
