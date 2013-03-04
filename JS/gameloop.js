@@ -6,7 +6,7 @@ var left_avtar = 'images/man_left.gif';
 var right_avtar = 'images/man_right.gif';
 var straight_avtar = 'images/man_straight.gif';
 var back_avtar = 'images/man_back.gif';
-var global_colletables = new Array();
+var global_collectables = new Array();
 var gameloop = function gameloop() {
 	//1.render UI on canvass.
 	map = generate_map(1);	
@@ -51,7 +51,14 @@ function RenderUI(maparray){
 			}
 			meshArray.push(blockarray);
 		}	
-		
+		for(var gem_count =0;gem_count < global_collectables.length;gem_count++){
+			//var foreground = scene.Layer("foreground");
+			var gemsprite = get_Sprite("forward");
+			gemsprite.loadImg(global_collectables[gem_count].image);
+			gemsprite.position(global_collectables[gem_count].X*50,global_collectables[gem_count].Y*50);			
+			global_collectables[gem_count].spriteObj = gemsprite;
+			global_collectables[gem_count].spriteObj.update();
+		}
 		//var player = scene.Sprite(straight_avtar,{layer:foreground,color:"grey"});
 		var player = get_Sprite("forward");
 		player.size(32,34);
@@ -88,7 +95,7 @@ function RenderUI(maparray){
 }
 var state_image_map = {"forward":straight_avtar,"back":back_avtar,"left":left_avtar,"right":right_avtar} 
 function get_Sprite(state){
-	var foreground = scene.Layer("background");
+	var foreground = scene.Layer("foreground");
 	var player = scene.Sprite(state_image_map[state],{layer:foreground,color:"grey"});	
 	return player;
 }

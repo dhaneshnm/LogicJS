@@ -2,6 +2,7 @@ function game_player(currentPosition,spr){
 		this.Position = currentPosition;
 		this.state = new State("forward");
 		this.spriteObj = spr;
+		this.collectables = new Array();
 	}	
 function State(towhere){
 	this.movement = towhere;	
@@ -11,8 +12,9 @@ State.prototype.get_movement = function() {
 	};	
 
 
-function collectable(){
+function collectable(Position_X,Position_Y){
 	this.image ='images/ruby_64.png';
-	this.X = 0;
-	this.Y = 0;
+	this.X = Position_X;
+	this.Y = Position_Y;
+	this.spriteObj = null;
 }

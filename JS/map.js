@@ -14,11 +14,13 @@ var generate_map = function generate_map(level){
 			Map[1][4] = 1;
 			Map[5][2] = 1;
 			Map[1][8] = 1;
-			Map[3][0] = 1;
+			Map[3][0] = 1;			
 			Map[0][0] = 2;//start
 			var final_row = Math.floor(winning_position/9);
 			var final_column = Math.floor(winning_position%9);
 			Map[final_row][final_column] = 2;//end
+			var gem_1 = new collectable(2,4);
+			global_collectables.push(gem_1);
 			break;			
 		case 2:
 			Map[1][1] = 1;
