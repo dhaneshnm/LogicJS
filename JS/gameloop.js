@@ -26,8 +26,8 @@ function RenderUI(maparray){
 	// ready, the callback function is called.
 	scene.loadImages([left_avtar,right_avtar,straight_avtar,back_avtar,'images/Rocks.png','images/Dirts.png',"images/Ice-BT.png"], function() {
 		var meshlayer = scene.Layer("background");
-		var mesh = scene.Sprite(false, {layer:meshlayer, color:"Blue"});
-		mesh.size(450,450);
+		var mesh = scene.Sprite(false, {layer:meshlayer, color:"red"});
+		mesh.size(600,450);
 		mesh.update();
 		var uniBlock = 50;
 		var meshArray = new Array(9);
