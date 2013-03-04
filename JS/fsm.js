@@ -105,17 +105,6 @@ function interpret_move(command,playerObject){
 		StateChange(command,playerObject);
 	}
 }	
-function game_player(currentPosition,spr){
-		this.Position = currentPosition;
-		this.state = new State("forward");
-		this.spriteObj = spr;
-	}	
-function State(towhere){
-	this.movement = towhere;	
-}
-State.prototype.get_movement = function() {		
-		return this.movement;
-	};	
 function updatemotion(playerObject,new_position){	
 	if(isValidMove(new_position)){
  		playerObject.Position = new_position;

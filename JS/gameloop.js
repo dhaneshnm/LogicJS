@@ -118,5 +118,4 @@ function execute_line(){
 	line_code = line_code.trim().toLowerCase();
 	interpret_move(line_code,current_player);		
 }
-
 gameloop();
