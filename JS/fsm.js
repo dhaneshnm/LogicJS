@@ -34,10 +34,45 @@
  		};
 	}	
 	function PlayerPickup(playerObject){
+		switch(playerObject.state.get_movement()){
+	 		case "forward"://Pick up from front
+	 			if(CheckforCollectable(playerObject.Position+states){
 
+	 			}
+	 			else{
+	 				console.log("Nothing to puck up there");
+	 			}
+	 			break;
+	 		case "back"://Pick up from back
+	 			if(CheckforCollectable(playerObject.Position-states){
+
+	 			}
+	 			else{
+	 				console.log("Nothing to puck up there");
+	 			}
+	 			break;
+	 		case "left"://Pick up from left
+	 			if(CheckforCollectable(playerObject.Position+1){
+
+	 			}
+	 			else{
+	 				console.log("Nothing to puck up there");
+	 			}
+	 			break;
+	 		case "right"://Pick up from right
+		 		if(CheckforCollectable(playerObject.Position-1){
+
+	 			}
+	 			else{
+	 				console.log("Nothing to puck up there");
+	 			}
+		 		break;
+		 	default:
+		 		console.log("invalid input for PlayerMove by "+playerObject.state.get_movement());
+	 	};
 	}
 	function PlayerDrop(playerObject){
-		
+
 	}
 	function StateChange(newstate,playerObject){
 		switch(playerObject.state.get_movement()){
@@ -173,4 +208,12 @@ function UpdateAvatar(playerObject){
 	var newstate = playerObject.state.get_movement();
 	playerObject.spriteObj.loadImg(state_image_map[newstate]);	
 	playerObject.spriteObj.update();
+}
+function CheckforCollectable(position){
+	for(var i=0;i<global_collectables.lenght;i++){
+		if(global_collectables[i].X === (Position/states) && global_collectables[i].Y === (Position%states)){
+			return true;
+		}
+	}
+	return false;	
 }
