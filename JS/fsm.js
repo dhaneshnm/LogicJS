@@ -36,7 +36,7 @@
 	function PlayerPickup(playerObject){
 		switch(playerObject.state.get_movement()){
 	 		case "forward"://Pick up from front
-	 			if(CheckforCollectable(playerObject.Position+states){
+	 			if(CheckforCollectable(playerObject.Position+states)){
 
 	 			}
 	 			else{
@@ -44,7 +44,7 @@
 	 			}
 	 			break;
 	 		case "back"://Pick up from back
-	 			if(CheckforCollectable(playerObject.Position-states){
+	 			if(CheckforCollectable(playerObject.Position-states)){
 
 	 			}
 	 			else{
@@ -52,7 +52,7 @@
 	 			}
 	 			break;
 	 		case "left"://Pick up from left
-	 			if(CheckforCollectable(playerObject.Position+1){
+	 			if(CheckforCollectable(playerObject.Position+1)){
 
 	 			}
 	 			else{
@@ -60,7 +60,7 @@
 	 			}
 	 			break;
 	 		case "right"://Pick up from right
-		 		if(CheckforCollectable(playerObject.Position-1){
+		 		if(CheckforCollectable(playerObject.Position-1)){
 
 	 			}
 	 			else{
@@ -210,8 +210,8 @@ function UpdateAvatar(playerObject){
 	playerObject.spriteObj.update();
 }
 function CheckforCollectable(position){
-	for(var i=0;i<global_collectables.lenght;i++){
-		if(global_collectables[i].X === (Position/states) && global_collectables[i].Y === (Position%states)){
+	for(var i=0;i<global_collectables.length;i++){
+		if(global_collectables[i].X === Math.floor(position/states) && global_collectables[i].Y === Math.floor(position%states)){
 			return true;
 		}
 	}
