@@ -6,6 +6,7 @@ var left_avtar = 'images/man_left.gif';
 var right_avtar = 'images/man_right.gif';
 var straight_avtar = 'images/man_straight.gif';
 var back_avtar = 'images/man_back.gif';
+var global_colletables = new Array();
 var gameloop = function gameloop() {
 	//1.render UI on canvass.
 	map = generate_map(1);	
