@@ -37,7 +37,7 @@
 		switch(playerObject.state.get_movement()){
 	 		case "forward"://Pick up from front
 	 			if(CheckforCollectable(playerObject.Position+states)){
-
+	 				updatepickup(playerObject,playerObject.Position+states);
 	 			}
 	 			else{
 	 				console.log("Nothing to puck up there");
@@ -45,7 +45,7 @@
 	 			break;
 	 		case "back"://Pick up from back
 	 			if(CheckforCollectable(playerObject.Position-states)){
-
+	 				updatepickup(playerObject,playerObject.Position-states);
 	 			}
 	 			else{
 	 				console.log("Nothing to puck up there");
@@ -53,7 +53,7 @@
 	 			break;
 	 		case "left"://Pick up from left
 	 			if(CheckforCollectable(playerObject.Position+1)){
-
+	 				updatepickup(playerObject,playerObject.Position+1);
 	 			}
 	 			else{
 	 				console.log("Nothing to puck up there");
@@ -61,7 +61,7 @@
 	 			break;
 	 		case "right"://Pick up from right
 		 		if(CheckforCollectable(playerObject.Position-1)){
-
+		 			updatepickup(playerObject,playerObject.Position-1);
 	 			}
 	 			else{
 	 				console.log("Nothing to puck up there");
@@ -211,9 +211,25 @@ function UpdateAvatar(playerObject){
 }
 function CheckforCollectable(position){
 	for(var i=0;i<global_collectables.length;i++){
-		if(global_collectables[i].X === Math.floor(position/states) && global_collectables[i].Y === Math.floor(position%states)){
+		console.log(global_collectables[i].X);
+		console.log(global_collectables[i].Y);
+		console.log(Math.floor(position/states));
+		console.log(Math.floor(position%states));
+		if(global_collectables[i].X === Math.floor(position%states) && global_collectables[i].Y === Math.floor(position/states)){
 			return true;
 		}
 	}
 	return false;	
+}
+function updatepickup(playerObject,position){
+	for(var i=0;i<global_collectables.length;i++){
+		if(global_collectables[i].X === Math.floor(position%states) && global_collectables[i].Y === Math.floor(position/states)){
+			var gem = global_collectables[i];
+			console.log("trying to pickup "+ gem);
+			playerObject.collectables.push(gem);
+			gem.spriteObj.position(-50,-50);
+			gem.spriteObj.update();
+			global_collectables.splice (i, i);
+		}
+	}
 }
