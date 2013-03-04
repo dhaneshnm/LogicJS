@@ -33,6 +33,12 @@
 	 		console.log("invalid input for PlayerMove by "+playerObject.state.get_movement());
  		};
 	}	
+	function PlayerPickup(playerObject){
+
+	}
+	function PlayerDrop(playerObject){
+		
+	}
 	function StateChange(newstate,playerObject){
 		switch(playerObject.state.get_movement()){
 			case "forward":
@@ -46,6 +52,12 @@
 		 		else if(newstate === "right"){
 		 			playerObject.state = new State("right");
 		 		}
+		 		else if(newstate == "pickup"){			 			
+			 			PlayerPickup(playerObject);
+			 		}	
+			 	else if(newstate == "drop"){			 			
+			 			PlayerDrop(playerObject);
+			 		} 
 	 			break;	 		
 	 		case "left":
 		 		if(newstate === "move") {
@@ -58,12 +70,24 @@
 		 		else if(newstate == "right"){
 		 			playerObject.state = new State("forward");
 		 		}
+		 		else if(newstate == "pickup"){			 			
+			 			PlayerPickup(playerObject);
+			 		}	
+			 	else if(newstate == "drop"){			 			
+			 			PlayerDrop(playerObject);
+			 		} 
 		 		break;
 	 		case "right":
 		 		if(newstate === "move") {
 			 			playerObject.state = new State("right");
 			 			PlayerMove(playerObject);
 			 		}
+			 		else if(newstate == "pickup"){			 			
+			 			PlayerPickup(playerObject);
+			 		}	
+			 		else if(newstate == "drop"){			 			
+			 			PlayerDrop(playerObject);
+			 		} 
 			 		else if(newstate === "left"){
 			 			playerObject.state = new State("forward");
 			 		}
@@ -76,12 +100,18 @@
 			 			playerObject.state = new State("back");
 			 			PlayerMove(playerObject);
 			 		}
+			 		else if(newstate == "pickup"){			 			
+			 			PlayerPickup(playerObject);
+			 		}	
+			 		else if(newstate == "drop"){			 			
+			 			PlayerDrop(playerObject);
+			 		} 
 			 		else if(newstate === "left"){
 			 			playerObject.state = new State("right");
 			 		}
 			 		else if(newstate == "right"){
 			 			playerObject.state = new State("left");
-			 		}
+			 		}			 		
 			 	
 		 		break;
 	 		default:	 		
