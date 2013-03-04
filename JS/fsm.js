@@ -72,7 +72,38 @@
 	 	};
 	}
 	function PlayerDrop(playerObject){
-
+		switch(playerObject.state.get_movement()){
+ 		case "forward"://move  forward 
+ 			var new_position = 	playerObject.Position+states;	
+ 			updatedrop(playerObject,new_position);	
+ 			break;
+ 		case "back"://move  forward
+ 			var new_position = 	playerObject.Position-states; 		 		 				 			
+ 			updatemotion(playerObject,new_position);	
+ 			break;
+ 		case "left"://turn left 	 					
+ 			if((playerObject.Position%states) == 8){
+ 				console.log("invalid move");
+ 				return;
+ 			}
+ 			else{
+ 				var new_position = 	 playerObject.Position+1; 			 				 			
+ 				updatedrop(playerObject,new_position);	
+ 			}
+ 			break;
+ 		case "right"://turn right
+	 		if((playerObject.Position%states) == 0){
+ 				console.log("invalid move");
+ 				return;
+ 			}
+ 			else{
+ 				var new_position = 	 playerObject.Position-1; 			 				 			
+ 				updatedrop(playerObject,new_position);		
+ 			} 		
+	 		break;
+	 	default:
+	 		console.log("invalid input for PlayerMove by "+playerObject.state.get_movement());
+ 		};
 	}
 	function StateChange(newstate,playerObject){
 		switch(playerObject.state.get_movement()){
@@ -232,4 +263,13 @@ function updatepickup(playerObject,position){
 			global_collectables.splice (i, i);
 		}
 	}
+}
+
+function updatedrop(playerObject,position){
+	var gem = playerObject.collectables.pop();
+	gem.X = Math.floor(position%states);
+	gem.Y = Math.floor(position/states);
+	gem.spriteObj.position(gem.X*50,gem.Y*50);
+	gem.spriteObj.update();
+	global_collectables.push(gem);
 }
