@@ -1,6 +1,6 @@
 var current_player;
 var map;
-var winning_position = 75;
+var winning_position = 75;//dfault,catual value will be set in map function
 var scene;
 var left_avtar = 'images/man_left.gif';
 var right_avtar = 'images/man_right.gif';
@@ -9,7 +9,7 @@ var back_avtar = 'images/man_back.gif';
 var global_collectables = new Array();
 var gameloop = function gameloop() {
 	//1.render UI on canvass.
-	map = generate_map(1);	
+	map = generate_map(2);	
 	RenderUI(map);	
 	//2.Wait for user to hit "go".
 	//3.Pass user program to execute module,ie call execute module.	
