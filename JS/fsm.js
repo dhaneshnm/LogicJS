@@ -107,6 +107,12 @@
 	}
 	function StateChange(newstate,playerObject){
 		switch(playerObject.state.get_movement()){
+			case "f1":
+				executecode("#f1");
+				break;
+			case "f2":
+				executecode("#f2");
+				break;
 			case "forward":
 		 		if(newstate === "move") {
 		 			playerObject.state = new State("forward");

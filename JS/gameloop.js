@@ -70,7 +70,8 @@ function RenderUI(maparray){
 		//setTimeout(function(){playermove(100,0,player);},3000);
 		$(document).ready(function(){	
 			$("#code_wrapper #go_button").click(function(){		
-				executeCode();
+				var function_window_id = "#code_window";
+				executeCode(function_window_id);
 			});
 			$("#code_wrapper #reset_button").click(function(){
 				$("#code_window").val("");
@@ -104,8 +105,8 @@ function simpleParse(code){
 	return program;
 }
 
-function executeCode(){
-	var code = $("#code_window").val();
+function executeCode(function_window_id){
+	var code = $(function_window_id).val();
 	console.log(code);
 	code = code.replace(/(\r\n|\n|\r)/gm,"");
 	code = code.replace(/(\s)/gm,"");
