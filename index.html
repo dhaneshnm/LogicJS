@@ -8,13 +8,22 @@ background-color: black;
 color: white;
 width: 300px;
 height: 300px;
+float: left;
+}
+#f1{
+background-color: black;
+color: white;
+width: 300px;
+height: 300px;
+float: right;
+margin-top: 0px;
 }
 #code_wrapper{
 background-color: lightgreen;
 color: black;
 margin-left: 650px;
 margin-top: -480px;
-width: 302px;
+width: 600px;
 text-align: left;
 }
 body{
@@ -34,14 +43,18 @@ body{
 <script type="text/javascript">
 </script>
 <div id="code_wrapper">
-<label>Main</label>	
+<label>Main</label><br/>	
 <textarea id ="code_window">	
 </textarea><br/>
+<div style="float:right;margin-top:-37px">
+<label>Function1</label><br/>	
+<textarea id ="f1">	
+</textarea>
+</div>
 <BUTTON id="go_button">go</BUTTON>
 <BUTTON id="reset_button">Reset</BUTTON>
 <BUTTON id="navmode_add">Turn on Nav mode</BUTTON>
 <BUTTON id="navmode_remove" style="display:none">Turn off Nav mode</BUTTON>
 </div>
-
 </body>
 </html>

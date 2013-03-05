@@ -106,13 +106,7 @@
  		};
 	}
 	function StateChange(newstate,playerObject){
-		switch(playerObject.state.get_movement()){
-			case "f1":
-				executecode("#f1");
-				break;
-			case "f2":
-				executecode("#f2");
-				break;
+		switch(playerObject.state.get_movement()){			
 			case "forward":
 		 		if(newstate === "move") {
 		 			playerObject.state = new State("forward");
@@ -202,6 +196,12 @@ function interpret_move(command,playerObject){
 		for (var i = 0; i < repeat_times; i++) {
 			StateChange(move,playerObject);	
 		};		
+	}
+	else if(command === "f1"){
+		executeCode("#f1");
+		}
+	else if(command == "f2"){
+		executeCode("#f2");
 	}
 	else{
 		StateChange(command,playerObject);
