@@ -258,7 +258,7 @@ function updatepickup(playerObject,position){
 			var gem = global_collectables[i];
 			console.log("trying to pickup "+ gem);
 			playerObject.collectables.push(gem);
-			gem.spriteObj.position(500,100);
+			gem.spriteObj.position(500,playerObject.collectables.length*50);
 			gem.spriteObj.update();
 			global_collectables.splice (i, i);
 		}

@@ -21,6 +21,10 @@ var generate_map = function generate_map(level){
 			Map[final_row][final_column] = 2;//end
 			var gem_1 = new collectable(2,4);
 			global_collectables.push(gem_1);
+
+			var gem_2 = new collectable(3,5);
+			global_collectables.push(gem_2);
+
 			break;			
 		case 2:
 			Map[1][1] = 1;
