@@ -224,9 +224,17 @@ function updatemotion(playerObject,new_position){
  		console.log("invalid move")
  	}
  	if(new_position == winning_position){
-		console.log("You have arrived ..");
-		alert("you won.you are awesome!!!");
-		window.location.reload();
+ 		if(level == 4){
+			console.log("You have arrived ..");
+			alert("you have cleared all levels.you are a Logic Ninja!!!");
+			window.location.reload();
+		}
+		else{
+			console.log("You have arrived ..");
+			alert("you have cleared level"+level+"Now you can kick ass at next level!!");
+			level = level+1;
+			gameloop(level);
+		}
 	}	
  }
 

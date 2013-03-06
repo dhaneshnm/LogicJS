@@ -7,9 +7,10 @@ var right_avtar = 'images/man_right.gif';
 var straight_avtar = 'images/man_straight.gif';
 var back_avtar = 'images/man_back.gif';
 var global_collectables = new Array();
-var gameloop = function gameloop() {
+var level = 1;
+var gameloop = function gameloop(level) {
 	//1.render UI on canvass.
-	map = generate_map(3);	
+	map = generate_map(level);	
 	RenderUI(map);	
 	//2.Wait for user to hit "go".
 	//3.Pass user program to execute module,ie call execute module.	
@@ -21,7 +22,12 @@ var gameloop = function gameloop() {
 	//9.on replay,repeat gameloop.
 }
 function RenderUI(maparray){
-	scene = sjs.Scene({w:640, h:480});
+	if(level >1){
+		scene.reset();
+	}
+	else{
+		scene = sjs.Scene({w:640, h:480});
+	}
 	// load the images in parallel. When all the images are
 	// ready, the callback function is called.
 	scene.loadImages([left_avtar,right_avtar,straight_avtar,back_avtar,'images/Rocks.png','images/Dirts.png',"images/Ice-BT.png"], function() {
@@ -127,4 +133,4 @@ function execute_line(){
 	line_code = line_code.trim().toLowerCase();
 	interpret_move(line_code,current_player);		
 }
-gameloop();
+gameloop(level);
