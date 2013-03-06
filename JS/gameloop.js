@@ -9,7 +9,7 @@ var back_avtar = 'images/man_back.gif';
 var global_collectables = new Array();
 var gameloop = function gameloop() {
 	//1.render UI on canvass.
-	map = generate_map(2);	
+	map = generate_map(3);	
 	RenderUI(map);	
 	//2.Wait for user to hit "go".
 	//3.Pass user program to execute module,ie call execute module.	

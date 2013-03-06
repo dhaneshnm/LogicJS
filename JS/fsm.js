@@ -270,7 +270,6 @@ function updatepickup(playerObject,position){
 		}
 	}
 }
-
 function updatedrop(playerObject,position){
 	var gem = playerObject.collectables.pop();
 	gem.X = Math.floor(position%states);
