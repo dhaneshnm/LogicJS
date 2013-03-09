@@ -20,7 +20,8 @@ var map_size = 9;
 var ProcessNode = function (map,current_node,next_row,next_column,startandend){	
 	console.log("May be I bored her.I will improve.I will be an awesome charmer soon!");
 	console.log(next_row+"booya"+next_column);
-	console.log(openlist);	
+	console.log("the open list "+openlist);	
+	console.log(closedlist);	
 	console.log(map[next_row][next_column]);
 	if(map[next_row][next_column] === 0){			
 			var temp_node = new node(next_row,next_column);
@@ -49,10 +50,18 @@ function paths(map,startandend,program,result) {
 		openlist.push(new_node);
 		while(openlist.length >0){
 			new_node = openlist.pop();
-			ProcessNode(map,new_node,new_node.row_number,new_node.column_number+1,startandend);		
-			ProcessNode(map,new_node,new_node.row_number,new_node.column_number-1,startandend);
-			ProcessNode(map,new_node,new_node.row_number+1,new_node.column_number,startandend);
-			//ProcessNode(map,new_node,new_node.row_number-1,new_node.column_number);
+			if(new_node.column_number < 8){
+				ProcessNode(map,new_node,new_node.row_number,new_node.column_number+1,startandend);	
+			}
+			if(new_node.column_number > 0){
+				ProcessNode(map,new_node,new_node.row_number,new_node.column_number-1,startandend);
+			}			
+			if(new_node.row_number < 8){
+				ProcessNode(map,new_node,new_node.row_number+1,new_node.column_number,startandend);
+			}
+			if(new_node.row_number > 0){
+				ProcessNode(map,new_node,new_node.row_number-1,new_node.column_number,startandend);
+			}
 			closedlist.push(new_node);			
 		}	
  console.log(closedlist);
