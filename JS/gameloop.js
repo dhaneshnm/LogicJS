@@ -21,7 +21,7 @@ var gameloop = function gameloop(level) {
 	//8.if score less than at,wait player to hit "replay".
 	//9.on replay,repeat gameloop.
 }
-function RenderUI(maparray){
+function RenderUI(maparray){	
 	if(level >1){
 		scene.reset();
 	}
@@ -78,6 +78,7 @@ function RenderUI(maparray){
 			$("#code_wrapper #go_button").click(function(){		
 				var function_window_id = "#code_window";
 				executeCode(function_window_id);
+
 			});
 			$("#code_wrapper #reset_button").click(function(){
 				$("#code_window").val("");
@@ -98,7 +99,7 @@ function RenderUI(maparray){
 				$("#code_wrapper #navmode_add").show();
 			});						
 	  	});	   
-	});
+	});	
 }
 var state_image_map = {"forward":straight_avtar,"back":back_avtar,"left":left_avtar,"right":right_avtar} 
 function get_Sprite(state){
@@ -124,6 +125,8 @@ function executeCode(function_window_id){
 					//setTimeout(function(){StateChange(program[i],current_player);},500);
 				interpret_move(program[i],current_player);				
 	}
+	var startend = {"start":1,"end":60};
+	paths(map,startend,program,true);
 }
 function execute_line(){
 	var code = $("#code_window").val();

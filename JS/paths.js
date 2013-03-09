@@ -1,54 +1,68 @@
-function paths(map,startandend,program,result) {
-	var numberofinstructions = program.length;
-	var node = function node(row_number,column_number){
-		var parent = null;
-		var row_number = 0;
-		var column_number = 0;
-		var G = 0;
-		var H = 0;
+var node = function node(row_number,column_number){
+		this.parent = null;
+		this.row_number = row_number;
+		this.column_number = column_number;
+		this.G = 0;
+		this.H = 0;
 	}
-	var get_H = function get_H(map,temp_node){
-		var end_row = startandend.end/10;
-		var end_column = startandend.end%10;
-		return ((end_column -temp_node.column_number)+(end.node -temp_node.row_number));
+var get_H = function get_H(map,temp_node,startandend){
+		console.log(startandend);
+		var end_row = startandend.end/map_size;
+		var end_column = startandend.end%map_size;
+		return ((end_column -temp_node.column_number)+(end_row -temp_node.row_number));
 	}
-	var findNextNode = function findNextNode(openlist){
+var findNextNode = function findNextNode(openlist){
 		return openlist[0];//wrong logic,but will change it soon
 	}
-	var openlist = [];
-	var closedlist =[];
-	var start_node = new node(0,0);
-	start_node.row_number = startandend.start/10;
-	start_node.column_number = startandend.start%10;
-	var ProcessNode = function ProcessNode(current_node,next_row,next_column){
-		if(map[next_row][next_column] === 0){
-			var temp_node = new node(cnext_row,next_column);
-			temp_node.G = start_node.G + 10;
-			temp_node.H = get_H(map,temp_node);
+var openlist = [];
+var closedlist =[];
+var map_size = 9;
+var ProcessNode = function (map,current_node,next_row,next_column,startandend){	
+	console.log("May be I bored her.I will improve.I will be an awesome charmer soon!");
+	console.log(next_row+"booya"+next_column);
+	console.log(openlist);	
+	console.log(map[next_row][next_column]);
+	if(map[next_row][next_column] === 0){			
+			var temp_node = new node(next_row,next_column);
+			temp_node.G = current_node.G + map_size;
+			temp_node.H = get_H(map,temp_node,startandend);
 			temp_node.parent = current_node;
-			var existance = checkifexist(temp_node,openlist);
+			var existance = check_for_node(temp_node,openlist);
 			if(existance < 0){
 				openlist.push(temp_node);	
+				//console.log("May be I bored her.But I am too lazy to find out!");
 			}
 			else{
-				if(openlist[existance].G > current_node.G+10){
+				if(openlist[existance].G > current_node.G+map_size){
 					openlist[existance].parent = current_node;
-					openlist[existance].G = current_node.G+10
+					openlist[existance].G = current_node.G+map_size;
 				}
-			}
-			
+			}			
 		}
-
 	}
-	openlist.push(start_node);
-	while(openlist.length >0){
-		ProcessNode(start_node,start_node.row_number,start_node.column_number+1);		
-		ProcessNode(start_node,start_node.row_number,start_node.column_number-1);
-		ProcessNode(start_node,start_node.row_number+1,start_node.column_number);
-		ProcessNode(start_node,start_node.row_number-1,start_node.column_number);
-		openlist.remove(start_node);
-		closedlist.push(start_node);
-		start_node = findNextNode(openlist);
-	}
-
+function paths(map,startandend,program,result) {
+		var numberofinstructions = program.length;
+		var map_size = 9;
+		var new_node = new node(0,0);
+		new_node.row_number = 0;Math.floor(startandend.start/map_size);
+		new_node.column_number = 0; Math.floor(startandend.start%map_size);	
+		openlist.push(new_node);
+		while(openlist.length >0){
+			new_node = openlist.pop();
+			ProcessNode(map,new_node,new_node.row_number,new_node.column_number+1,startandend);		
+			ProcessNode(map,new_node,new_node.row_number,new_node.column_number-1,startandend);
+			ProcessNode(map,new_node,new_node.row_number+1,new_node.column_number,startandend);
+			//ProcessNode(map,new_node,new_node.row_number-1,new_node.column_number);
+			closedlist.push(new_node);			
+		}	
+ console.log(closedlist);
+ console.log(openlist);
+}
+function check_for_node(list,node){
+	for (var i = list.length - 1; i >= 0; i--) {
+		if((list[i].column_number === node.column_number) && (list[i].row_number === node.row_number)){
+			return i;
+		}
+	};
+	return -1;
 }
