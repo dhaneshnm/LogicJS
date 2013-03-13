@@ -125,7 +125,7 @@ function executeCode(function_window_id){
 					//setTimeout(function(){StateChange(program[i],current_player);},500);
 				interpret_move(program[i],current_player);				
 	}
-	var startend = {"start":1,"end":60};
+	var startend = {"start":1,"end":50};
 	paths(map,startend,program,true);
 }
 function execute_line(){
