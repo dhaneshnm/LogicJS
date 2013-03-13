@@ -1,7 +1,7 @@
 var node = function node(row_number,column_number){		
 		this.row_number = row_number;
 		this.column_number = column_number;
-		this.G = 0;
+		this.G = 200;
 		this.H = 0;
 		this.parent = null;
 	}
@@ -28,7 +28,7 @@ var get_H = function get_H(temp_node,startandend){
 var findNextNode = function findNextNode(openlist){
 		var lowest = 0;
 		for(var index = 1;index < openlist.length; index++){
-			if(openlist[index].H < openlist[lowest].H){
+			if((openlist[index].G+openlist[index].H)  < (openlist[lowest].G+openlist[lowest].H)){
 				lowest = index;
 			}
 		}
@@ -43,7 +43,7 @@ function ProcessNode(map,current_node,next_row,next_column,startandend){
 	//console.log(current_node);		
 	if(map[next_row][next_column] != 1){			
 			var temp_node = new node(next_row,next_column);
-			temp_node.G = current_node.G + map_size;
+			temp_node.G = temp_node.G+current_node.H-(temp_node.G+1);
 			temp_node.H = get_H(temp_node,startandend);
 			temp_node.parent = current_node;
 			var existance = check_for_node(openlist,temp_node);
@@ -52,19 +52,23 @@ function ProcessNode(map,current_node,next_row,next_column,startandend){
 				openlist.push(temp_node);
 				//console.log("***insert***");				
 				//console.log(temp_node);				
+				return true;
 			}
 			else if((isProcessed < 0) && (existance >0)) { //not processed but present in open list
 				if(openlist[existance].G > current_node.G+map_size){
 					openlist[existance].parent = current_node;
 					openlist[existance].G = current_node.G+map_size;
 				}
+				return true;
 			}
 			else if(isProcessed > 0 && existance < 0){//processed node
 				//ignore
-				console.log("node ignored")
+				console.log("node ignored");
+				return false;
 			}	
 			else if((isProcessed > 0) && (existance > 0)){
 				console.log("This shouldnot have happened");
+				return false;
 			}		
 	}
 	else{
@@ -78,18 +82,19 @@ function paths(map,startandend,program,result) {
 		var map_size = 9;
 		var new_node = new node(0,0);
 		new_node.row_number = 0;//Math.floor(startandend.start/map_size);
-		new_node.column_number = 0;// Math.floor(startandend.start%map_size);	
-		new_node.G =0;
-		new_node.H =0;
+		new_node.column_number = 0;// Math.floor(startandend.start%map_size);			
+		new_node.H = 0;
+		new_node.G = new_node.G-1;
 		openlist.push(new_node);		
 		var count = 0;		
-		while(openlist.length >0){			
+		while(openlist.length > 0){			
 			count = count+1;
+			console.log(openlist.length);
 			var lowest = findNextNode(openlist);
 			var new_node = openlist[lowest];
-			openlist.splice(lowest);
+			openlist.splice(lowest,1);
 			console.log("lowest is "+lowest);
-			
+			console.log(openlist.length);
 			if(new_node.column_number < 8){
 				ProcessNode(map,new_node,new_node.row_number,new_node.column_number+1,startandend);	
 			}
@@ -110,11 +115,10 @@ function paths(map,startandend,program,result) {
 			}
 			else{
 				processedlist.push(new_node);
-			}
-			
+			}			
 		}	
- console.log(closedlist);
- console.log(openlist);
+	console.log(closedlist);
+ 	console.log(openlist);
 }
 function check_for_node(list,node){
 	for (var i = list.length - 1; i >= 0; i--) {
