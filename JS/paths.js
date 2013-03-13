@@ -1,20 +1,34 @@
-var node = function node(row_number,column_number){
-		this.parent = null;
+var node = function node(row_number,column_number){		
 		this.row_number = row_number;
 		this.column_number = column_number;
 		this.G = 0;
 		this.H = 0;
+		this.parent = null;
 	}
-var get_H = function get_H(map,temp_node,startandend){
-		console.log(startandend);
-		var end_row = startandend.end/map_size;
-		var end_column = startandend.end%map_size;
-		return ((end_column -temp_node.column_number)+(end_row -temp_node.row_number));
+var get_H = function get_H(temp_node,startandend){		
+		var end_row = Math.floor(startandend.end/map_size);
+		var end_column = Math.floor(startandend.end%map_size);
+		var H_value = Math.abs(end_column -temp_node.column_number)+Math.abs(end_row -temp_node.row_number);
+		if((temp_node.row_number === 3) && (temp_node.column_number === 6)){			
+			console.log(end_row);
+			console.log(temp_node.row_number);
+			console.log(end_column);
+			console.log(temp_node.column_number);
+			console.log(H_value);
+		}
+		if((temp_node.row_number === 4) && (temp_node.column_number === 5)){			
+			console.log(end_row);
+			console.log(temp_node.row_number);
+			console.log(end_column);
+			console.log(temp_node.column_number);
+			console.log(H_value);
+		}
+		return H_value;
 	}
 var findNextNode = function findNextNode(openlist){
 		var lowest = 0;
 		for(var index = 1;index < openlist.length; index++){
-			if(openlist[index].H < lowest.H){
+			if(openlist[index].H < openlist[lowest].H){
 				lowest = index;
 			}
 		}
@@ -24,23 +38,20 @@ var openlist = [];
 var closedlist =[];
 var processedlist = [];
 var map_size = 9;
-var ProcessNode = function (map,current_node,next_row,next_column,startandend){	
-	console.log("May be I bored her.I will improve.I will be an awesome charmer soon!");	
-	console.log("the open list ");
-	console.log(openlist);	
-	console.log("the code list ");
-	console.log(closedlist);		
-	if(map[next_row][next_column] === 0){			
+function ProcessNode(map,current_node,next_row,next_column,startandend){
+	//console.log("******ProcessNode*******");
+	//console.log(current_node);		
+	if(map[next_row][next_column] != 1){			
 			var temp_node = new node(next_row,next_column);
 			temp_node.G = current_node.G + map_size;
-			temp_node.H = get_H(map,temp_node,startandend);
+			temp_node.H = get_H(temp_node,startandend);
 			temp_node.parent = current_node;
 			var existance = check_for_node(openlist,temp_node);
 			var isProcessed = check_for_node(processedlist,temp_node);
 			if(existance < 0 && isProcessed < 0){ //not processed,not in open lisr
-				openlist.push(temp_node);				
-				console.log(temp_node);
-				//console.log("May be I bored her.But I am too lazy to find out!");
+				openlist.push(temp_node);
+				//console.log("***insert***");				
+				//console.log(temp_node);				
 			}
 			else if((isProcessed < 0) && (existance >0)) { //not processed but present in open list
 				if(openlist[existance].G > current_node.G+map_size){
@@ -66,16 +77,19 @@ function paths(map,startandend,program,result) {
 		var numberofinstructions = program.length;
 		var map_size = 9;
 		var new_node = new node(0,0);
-		new_node.row_number = 0;Math.floor(startandend.start/map_size);
-		new_node.column_number = 0; Math.floor(startandend.start%map_size);	
-		openlist.push(new_node);
+		new_node.row_number = 0;//Math.floor(startandend.start/map_size);
+		new_node.column_number = 0;// Math.floor(startandend.start%map_size);	
+		new_node.G =0;
+		new_node.H =0;
+		openlist.push(new_node);		
 		var count = 0;		
-		while(openlist.length > 0){
+		while(openlist.length >0){			
 			count = count+1;
 			var lowest = findNextNode(openlist);
-			new_node = openlist[lowest];
+			var new_node = openlist[lowest];
 			openlist.splice(lowest);
 			console.log("lowest is "+lowest);
+			
 			if(new_node.column_number < 8){
 				ProcessNode(map,new_node,new_node.row_number,new_node.column_number+1,startandend);	
 			}
