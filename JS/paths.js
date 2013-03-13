@@ -41,7 +41,7 @@ var map_size = 9;
 function ProcessNode(map,current_node,next_row,next_column,startandend){
 	//console.log("******ProcessNode*******");
 	//console.log(current_node);		
-	if(map[next_row][next_column] != 1){			
+	if(map[next_row][next_column] === 0 ||map[next_row][next_column] === 2){			
 			var temp_node = new node(next_row,next_column);
 			temp_node.G = temp_node.G+current_node.H-(temp_node.G+1);
 			temp_node.H = get_H(temp_node,startandend);
@@ -87,7 +87,7 @@ function paths(map,startandend,program,result) {
 		new_node.G = new_node.G-1;
 		openlist.push(new_node);		
 		var count = 0;		
-		while(openlist.length > 0){			
+		while(count < 20){			
 			count = count+1;
 			console.log(openlist.length);
 			var lowest = findNextNode(openlist);
@@ -95,26 +95,32 @@ function paths(map,startandend,program,result) {
 			openlist.splice(lowest,1);
 			console.log("lowest is "+lowest);
 			console.log(openlist.length);
+			var isProcessSucess1 = false;
+			var isProcessSucess2 = false;
+			var isProcessSucess3 = false;
+			var isProcessSucess4 = false;
 			if(new_node.column_number < 8){
-				ProcessNode(map,new_node,new_node.row_number,new_node.column_number+1,startandend);	
+				isProcessSucess1=ProcessNode(map,new_node,new_node.row_number,new_node.column_number+1,startandend);	
 			}
 			if(new_node.column_number > 0){
-				ProcessNode(map,new_node,new_node.row_number,new_node.column_number-1,startandend);
+				isProcessSucess2=ProcessNode(map,new_node,new_node.row_number,new_node.column_number-1,startandend);
 			}			
 			if(new_node.row_number < 8){
-				ProcessNode(map,new_node,new_node.row_number+1,new_node.column_number,startandend);
+				isProcessSucess3=ProcessNode(map,new_node,new_node.row_number+1,new_node.column_number,startandend);
 			}
 			if(new_node.row_number > 0){
-				ProcessNode(map,new_node,new_node.row_number-1,new_node.column_number,startandend);
+				isProcessSucess4=ProcessNode(map,new_node,new_node.row_number-1,new_node.column_number,startandend);
 			}
-			if(check_for_node(closedlist,new_node) < 0){
-				closedlist.push(new_node);				
-				if((new_node.row_number === 5) &&(new_node.column_number === 5)){
-					break;
-				}				
+			if(isProcessSucess1||isProcessSucess2||isProcessSucess3||isProcessSucess4){
+				if(check_for_node(closedlist,new_node) < 0){
+					closedlist.push(new_node);				
+					if((new_node.row_number === 5) &&(new_node.column_number === 5)){
+						break;
+					}				
+				}
 			}
 			else{
-				processedlist.push(new_node);
+				processedlist.push(new_node);//a dead end.Never take that route ever again.
 			}			
 		}	
 	console.log(closedlist);
