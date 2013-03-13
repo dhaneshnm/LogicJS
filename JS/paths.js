@@ -48,7 +48,7 @@ function ProcessNode(map,current_node,next_row,next_column,startandend){
 			temp_node.parent = current_node;
 			var existance = check_for_node(openlist,temp_node);
 			var isProcessed = check_for_node(processedlist,temp_node);
-			if(existance < 0 && isProcessed < 0){ //not processed,not in open lisr
+			if(existance < 0 && isProcessed < 0){ //not processed,not in open list
 				openlist.push(temp_node);
 				//console.log("***insert***");				
 				//console.log(temp_node);				
@@ -67,7 +67,7 @@ function ProcessNode(map,current_node,next_row,next_column,startandend){
 				return false;
 			}	
 			else if((isProcessed > 0) && (existance > 0)){
-				console.log("This shouldnot have happened");
+				console.log("This should not have happened");
 				return false;
 			}		
 	}
@@ -125,6 +125,7 @@ function paths(map,startandend,program,result) {
 		}	
 	console.log(closedlist);
  	console.log(openlist);
+ 	console.log(findpath(closedlist,startandend));
 }
 function check_for_node(list,node){
 	for (var i = list.length - 1; i >= 0; i--) {
@@ -134,3 +135,15 @@ function check_for_node(list,node){
 	};
 	return -1;
 }
+function findpath(closedlist,startandend){
+	var start_row = Math.floor(startandend.start/map_size);
+	var start_column = Math.floor(startandend.start%map_size);
+	var pathlist = [];
+	var current_node = closedlist.pop();
+	while((current_node.row_number != start_row) && (current_node.column_number != start_column)){
+		pathlist.push(current_node);
+		current_node = current_node.parent;
+	}
+	return pathlist;
+}
+
