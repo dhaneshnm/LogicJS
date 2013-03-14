@@ -1,6 +1,6 @@
 var current_player;
 var map;
-var winning_position = 75;//dfault,catual value will be set in map function
+var winning_position = 75;//dfault,actual value will be set in map function
 var scene;
 var meshArray = [];
 var left_avtar = 'images/man_left.gif';
@@ -100,20 +100,20 @@ function RenderUI(maparray){
 			});	
 			//
 			$("#code_wrapper #show_path").click(function(){
-				var startend = {"start":0,"end":50};
+				var startend = {"start":0,"end":winning_position};
 				var thePath = paths(map,startend);
 				console.log(thePath);
-				/*for(var index =0;index <thePath.length-2;index++){
+				for(var index =1;index <thePath.length-1;index++){
 					loadPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
-				}*/
-				loadPathImage(meshArray[5][5]);					
+				}
+				//loadPathImage(meshArray[5][5]);					
 				$(this).hide();
 				$("#code_wrapper #hide_path").show();
 			})
 			$("#code_wrapper #hide_path").click(function(){
-				var startend = {"start":0,"end":50};
+				var startend = {"start":0,"end":winning_position};
 				var thePath = paths(map,startend);
-				for(var index =0;index <thePath.length-1;index++){
+				for(var index =1;index <thePath.length-1;index++){
 					clearPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
 				}
 				$(this).hide();
