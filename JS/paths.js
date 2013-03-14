@@ -107,6 +107,7 @@ function paths(map,startandend) {
 	var thePath = findpath(closedlist,startandend);
 	closedlist = [];//I use global variables,my bad :(
 	openlist = [];
+	processedlist =[];
 	return thePath; 	
 }
 function check_for_node(list,node){

@@ -25,6 +25,7 @@ var gameloop = function gameloop(level) {
 function RenderUI(maparray){	
 	if(level >1){
 		scene.reset();
+		//scene = sjs.Scene({w:640, h:480});
 	}
 	else{
 		scene = sjs.Scene({w:640, h:480});
@@ -36,7 +37,8 @@ function RenderUI(maparray){
 		var mesh = scene.Sprite(false, {layer:meshlayer, color:"red"});
 		mesh.size(600,450);
 		mesh.update();
-		var uniBlock = 50;		
+		var uniBlock = 50;	
+		meshArray = [];	
 		for(var	 j=0;j<9;j++){
 			var blockarray = new Array(9);
 			for(var i=0;i<9;i++){
@@ -68,7 +70,7 @@ function RenderUI(maparray){
 		//var player = scene.Sprite(straight_avtar,{layer:foreground,color:"grey"});
 		var player = get_Sprite("forward");
 		player.size(32,34);
-		//player.move(50,0);
+		player.position(Math.floor(startandend.start/9),Math.floor(startandend.start%9));
 		player.update();
 		current_player = new game_player(0,player);
 		//console.log(current_player.state.get_movement());
@@ -189,12 +191,12 @@ function ClearPathImage(boxSprite){
 
 function GeneratePath(){
 	var collectables = startandend["collectables"];
-	var start = startandend["start"];
+	var start = startandend["start"];	
 	var end = null;
 	for (var i = 0; i < collectables.length; i++) {
 		end = collectables[i];
-		console.log(start);
-		console.log(end);
+		//console.log(start);
+		//console.log(end);
 		var startend = {"start":start,"end":end};
 		var path = paths(map,startend);
 		ShowPath(path);
@@ -203,7 +205,7 @@ function GeneratePath(){
 	};	
 	end = startandend["end"];	
 	var startend = {"start":start,"end":end}
-	var path = paths(map,startend);
+	var path = paths(map,startend);	
 	ShowPath(path);
 }
 

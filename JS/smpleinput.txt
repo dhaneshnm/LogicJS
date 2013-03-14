@@ -1,6 +1,14 @@
 repeat(move,2);
-left;	
+left;
 repeat(move,2);
 right;
 move;
-pickup
+pickup;
+move;
+left;
+move;
+right;
+pickup;
+move;
+left;
+repeat(move,2);
