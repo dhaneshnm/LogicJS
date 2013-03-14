@@ -97,7 +97,13 @@ function RenderUI(maparray){
 				$("#code_window").unbind("keydown");
 				$(this).hide();
 				$("#code_wrapper #navmode_add").show();
-			});						
+			});	
+			//
+			$("#code_wrapper #show_path").click(function(){
+				var startend = {"start":1,"end":50};
+				var thePath = paths(map,startend);				
+			})
+
 	  	});	   
 	});	
 }
@@ -124,9 +130,7 @@ function executeCode(function_window_id){
 	for(var i=0;i<program.length;i++){			
 					//setTimeout(function(){StateChange(program[i],current_player);},500);
 				interpret_move(program[i],current_player);				
-	}
-	var startend = {"start":1,"end":50};
-	console.log(paths(map,startend));
+	}	
 }
 function execute_line(){
 	var code = $("#code_window").val();
