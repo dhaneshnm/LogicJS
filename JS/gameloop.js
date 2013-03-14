@@ -102,16 +102,18 @@ function RenderUI(maparray){
 			$("#code_wrapper #show_path").click(function(){
 				var startend = {"start":0,"end":50};
 				var thePath = paths(map,startend);
-				for(var index =0;index <thePath.length;index++){
+				console.log(thePath);
+				/*for(var index =0;index <thePath.length-2;index++){
 					loadPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
-				}
+				}*/
+				loadPathImage(meshArray[5][5]);					
 				$(this).hide();
 				$("#code_wrapper #hide_path").show();
 			})
 			$("#code_wrapper #hide_path").click(function(){
 				var startend = {"start":0,"end":50};
 				var thePath = paths(map,startend);
-				for(var index =1;index <thePath.length-1;index++){
+				for(var index =0;index <thePath.length-1;index++){
 					clearPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
 				}
 				$(this).hide();
