@@ -2,6 +2,7 @@ var current_player;
 var map;
 var winning_position = 75;//dfault,catual value will be set in map function
 var scene;
+var meshArray = [];
 var left_avtar = 'images/man_left.gif';
 var right_avtar = 'images/man_right.gif';
 var straight_avtar = 'images/man_straight.gif';
@@ -30,15 +31,14 @@ function RenderUI(maparray){
 	}
 	// load the images in parallel. When all the images are
 	// ready, the callback function is called.
-	scene.loadImages([left_avtar,right_avtar,straight_avtar,back_avtar,'images/Rocks.png','images/Dirts.png',"images/Ice-BT.png"], function() {
+	scene.loadImages([left_avtar,right_avtar,straight_avtar,back_avtar,'images/Rocks.png','images/Dirts.png',"images/Ice.png","images/Crate.png"], function() {
 		var meshlayer = scene.Layer("background");
 		var mesh = scene.Sprite(false, {layer:meshlayer, color:"red"});
 		mesh.size(600,450);
 		mesh.update();
-		var uniBlock = 50;
-		var meshArray = new Array(9);
+		var uniBlock = 50;		
 		for(var	 j=0;j<9;j++){
-			var blockarray = new Array(10);
+			var blockarray = new Array(9);
 			for(var i=0;i<9;i++){
 				if(maparray[j][i] == 0){
 					blockarray[i] = scene.Sprite('images/Rocks.png', {layer:meshlayer, color:"#c0c0c0"});
@@ -49,7 +49,7 @@ function RenderUI(maparray){
 				}	
 				else
 				{
-					blockarray[i] = scene.Sprite('images/Ice-BT.png', {layer:meshlayer, color:"#c0c0c0"});	
+					blockarray[i] = scene.Sprite('images/Ice.png', {layer:meshlayer, color:"#c0c0c0"});	
 				}
 				blockarray[i].size(49,49);
 				blockarray[i].move(uniBlock*i,uniBlock*j);
@@ -100,9 +100,24 @@ function RenderUI(maparray){
 			});	
 			//
 			$("#code_wrapper #show_path").click(function(){
-				var startend = {"start":1,"end":50};
-				var thePath = paths(map,startend);				
+				var startend = {"start":0,"end":50};
+				var thePath = paths(map,startend);
+				for(var index =0;index <thePath.length;index++){
+					loadPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
+				}
+				$(this).hide();
+				$("#code_wrapper #hide_path").show();
 			})
+			$("#code_wrapper #hide_path").click(function(){
+				var startend = {"start":0,"end":50};
+				var thePath = paths(map,startend);
+				for(var index =1;index <thePath.length-1;index++){
+					clearPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
+				}
+				$(this).hide();
+				$("#code_wrapper #show_path").show();
+			})		
+
 
 	  	});	   
 	});	
@@ -123,9 +138,7 @@ function executeCode(function_window_id){
 	console.log(code);
 	code = code.replace(/(\r\n|\n|\r)/gm,"");
 	code = code.replace(/(\s)/gm,"");
-	var program = simpleParse(code);
-	console.log(program[0]);
-	console.log(program[1]);
+	var program = simpleParse(code);	
 	//console.log(current_player.state.get_movement());
 	for(var i=0;i<program.length;i++){			
 					//setTimeout(function(){StateChange(program[i],current_player);},500);
@@ -141,3 +154,13 @@ function execute_line(){
 	interpret_move(line_code,current_player);		
 }
 gameloop(level);
+
+function loadPathImage(boxSprite){
+	boxSprite.loadImg("images/Ice.png");
+	boxSprite.update();
+}
+
+function clearPathImage(boxSprite){
+	boxSprite.loadImg("images/Rocks.png");
+	boxSprite.update();
+}
