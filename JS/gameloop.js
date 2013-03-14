@@ -126,7 +126,7 @@ function executeCode(function_window_id){
 				interpret_move(program[i],current_player);				
 	}
 	var startend = {"start":1,"end":50};
-	paths(map,startend,program,true);
+	console.log(paths(map,startend));
 }
 function execute_line(){
 	var code = $("#code_window").val();

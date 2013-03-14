@@ -8,21 +8,7 @@ var node = function node(row_number,column_number){
 var get_H = function get_H(temp_node,startandend){		
 		var end_row = Math.floor(startandend.end/map_size);
 		var end_column = Math.floor(startandend.end%map_size);
-		var H_value = Math.abs(end_column -temp_node.column_number)+Math.abs(end_row -temp_node.row_number);
-		if((temp_node.row_number === 3) && (temp_node.column_number === 6)){			
-			console.log(end_row);
-			console.log(temp_node.row_number);
-			console.log(end_column);
-			console.log(temp_node.column_number);
-			console.log(H_value);
-		}
-		if((temp_node.row_number === 4) && (temp_node.column_number === 5)){			
-			console.log(end_row);
-			console.log(temp_node.row_number);
-			console.log(end_column);
-			console.log(temp_node.column_number);
-			console.log(H_value);
-		}
+		var H_value = Math.abs(end_column -temp_node.column_number)+Math.abs(end_row -temp_node.row_number);		
 		return H_value;
 	}
 var findNextNode = function findNextNode(openlist){
@@ -77,8 +63,7 @@ function ProcessNode(map,current_node,next_row,next_column,startandend){
 		console.log(next_row+"booya"+next_column);
 	}
 	}
-function paths(map,startandend,program,result) {
-		var numberofinstructions = program.length;
+function paths(map,startandend) {		
 		var map_size = 9;
 		var new_node = new node(0,0);
 		new_node.row_number = 0;//Math.floor(startandend.start/map_size);
@@ -88,13 +73,10 @@ function paths(map,startandend,program,result) {
 		openlist.push(new_node);		
 		var count = 0;		
 		while(count < 20){			
-			count = count+1;
-			console.log(openlist.length);
+			count = count+1;			
 			var lowest = findNextNode(openlist);
 			var new_node = openlist[lowest];
-			openlist.splice(lowest,1);
-			console.log("lowest is "+lowest);
-			console.log(openlist.length);
+			openlist.splice(lowest,1);			
 			var isProcessSucess1 = false;
 			var isProcessSucess2 = false;
 			var isProcessSucess3 = false;
@@ -123,9 +105,8 @@ function paths(map,startandend,program,result) {
 				processedlist.push(new_node);//a dead end.Never take that route ever again.
 			}			
 		}	
-	console.log(closedlist);
- 	console.log(openlist);
- 	console.log(findpath(closedlist,startandend));
+	var thePath = findpath(closedlist,startandend);
+	return thePath; 	
 }
 function check_for_node(list,node){
 	for (var i = list.length - 1; i >= 0; i--) {
@@ -135,12 +116,10 @@ function check_for_node(list,node){
 	};
 	return -1;
 }
-function findpath(closedlist,startandend){
-	var start_row = Math.floor(startandend.start/map_size);
-	var start_column = Math.floor(startandend.start%map_size);
+function findpath(closedlist,startandend){	
 	var pathlist = [];
 	var current_node = closedlist.pop();
-	while((current_node.row_number != start_row) && (current_node.column_number != start_column)){
+	while(current_node !=null){
 		pathlist.push(current_node);
 		current_node = current_node.parent;
 	}
