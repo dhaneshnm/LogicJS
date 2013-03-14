@@ -100,22 +100,31 @@ function RenderUI(maparray){
 			});	
 			//
 			$("#code_wrapper #show_path").click(function(){
-				var startend = {"start":0,"end":winning_position};
+				var startend = {"start":0,"end":38};
 				var thePath = paths(map,startend);
-				console.log(thePath);
-				for(var index =1;index <thePath.length-1;index++){
-					loadPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
-				}
+				var path1 = paths(map,startend);
+				ShowPath(path1);
+				startend = {"start":38,"end":48};				
+				var path2 = paths(map,startend);
+				ShowPath(path2);
+				startend = {"start":48,"end":50};
+				var path3 = paths(map,startend);
+				ShowPath(path3);				
 				//loadPathImage(meshArray[5][5]);					
 				$(this).hide();
 				$("#code_wrapper #hide_path").show();
 			})
 			$("#code_wrapper #hide_path").click(function(){
-				var startend = {"start":0,"end":winning_position};
+				var startend = {"start":0,"end":38};
 				var thePath = paths(map,startend);
-				for(var index =1;index <thePath.length-1;index++){
-					clearPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
-				}
+				var path1 = paths(map,startend);
+				HidePath(path1);
+				startend = {"start":38,"end":48};				
+				var path2 = paths(map,startend);
+				HidePath(path2);
+				startend = {"start":48,"end":50};
+				var path3 = paths(map,startend);
+				HidePath(path3);			
 				$(this).hide();
 				$("#code_wrapper #show_path").show();
 			})		
@@ -156,13 +165,22 @@ function execute_line(){
 	interpret_move(line_code,current_player);		
 }
 gameloop(level);
-
-function loadPathImage(boxSprite){
+function ShowPath(thePath){
+	for(var index =1;index <thePath.length-1;index++){
+		LoadPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
+	}
+}
+function HidePath(thePath){
+	for(var index =1;index <thePath.length-1;index++){
+		ClearPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
+	}
+}
+function LoadPathImage(boxSprite){
 	boxSprite.loadImg("images/Ice.png");
 	boxSprite.update();
 }
 
-function clearPathImage(boxSprite){
+function ClearPathImage(boxSprite){
 	boxSprite.loadImg("images/Rocks.png");
 	boxSprite.update();
 }

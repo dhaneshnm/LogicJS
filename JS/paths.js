@@ -66,8 +66,8 @@ function ProcessNode(map,current_node,next_row,next_column,startandend){
 function paths(map,startandend) {		
 		var map_size = 9;
 		var new_node = new node(0,0);
-		new_node.row_number = 0;//Math.floor(startandend.start/map_size);
-		new_node.column_number = 0;// Math.floor(startandend.start%map_size);			
+		new_node.row_number = Math.floor(startandend.start/map_size);
+		new_node.column_number =  Math.floor(startandend.start%map_size);			
 		new_node.H = 0;
 		new_node.G = new_node.G-1;
 		openlist.push(new_node);		
