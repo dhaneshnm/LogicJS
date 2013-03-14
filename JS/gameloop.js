@@ -1,14 +1,3 @@
-var current_player;
-var map;
-var winning_position = 75;//dfault,actual value will be set in map function
-var scene;
-var meshArray = [];
-var left_avtar = 'images/man_left.gif';
-var right_avtar = 'images/man_right.gif';
-var straight_avtar = 'images/man_straight.gif';
-var back_avtar = 'images/man_back.gif';
-var global_collectables = new Array();
-var level = 1;
 var gameloop = function gameloop(level) {
 	//1.render UI on canvass.
 	map = generate_map(level);	
@@ -99,42 +88,18 @@ function RenderUI(maparray){
 				$("#code_window").unbind("keydown");
 				$(this).hide();
 				$("#code_wrapper #navmode_add").show();
-			});	
-			//
-			$("#code_wrapper #show_path").click(function(){
-				/*var startend = {"start":0,"end":38};
-				var thePath = paths(map,startend);
-				var path1 = paths(map,startend);
-				ShowPath(path1);
-				startend = {"start":38,"end":48};				
-				var path2 = paths(map,startend);
-				ShowPath(path2);
-				startend = {"start":48,"end":50};
-				var path3 = paths(map,startend);
-				ShowPath(path3);	*/			
-				//loadPathImage(meshArray[5][5]);					
+			});				
+			$("#code_wrapper #show_path").click(function(){				
 				GeneratePath();
 				$(this).hide();
 				$("#code_wrapper #hide_path").show();
 			})
-			$("#code_wrapper #hide_path").click(function(){
-				/*var startend = {"start":0,"end":38};
-				var thePath = paths(map,startend);
-				var path1 = paths(map,startend);
-				HidePath(path1);
-				startend = {"start":38,"end":48};				
-				var path2 = paths(map,startend);
-				HidePath(path2);
-				startend = {"start":48,"end":50};
-				var path3 = paths(map,startend);
-				HidePath(path3);	*/
+			$("#code_wrapper #hide_path").click(function(){				
 				ClearPath();		
 				$(this).hide();
 				$("#code_wrapper #show_path").show();
-			})		
-
-
-	  	});	   
+			})
+		});	   
 	});	
 }
 var state_image_map = {"forward":straight_avtar,"back":back_avtar,"left":left_avtar,"right":right_avtar} 
@@ -153,11 +118,9 @@ function executeCode(function_window_id){
 	console.log(code);
 	code = code.replace(/(\r\n|\n|\r)/gm,"");
 	code = code.replace(/(\s)/gm,"");
-	var program = simpleParse(code);	
-	//console.log(current_player.state.get_movement());
-	for(var i=0;i<program.length;i++){			
-					//setTimeout(function(){StateChange(program[i],current_player);},500);
-				interpret_move(program[i],current_player);				
+	var program = simpleParse(code);		
+	for(var i=0;i<program.length;i++){
+		interpret_move(program[i],current_player);				
 	}	
 }
 function execute_line(){
@@ -194,9 +157,7 @@ function GeneratePath(){
 	var start = startandend["start"];	
 	var end = null;
 	for (var i = 0; i < collectables.length; i++) {
-		end = collectables[i];
-		//console.log(start);
-		//console.log(end);
+		end = collectables[i];		
 		var startend = {"start":start,"end":end};
 		var path = paths(map,startend);
 		ShowPath(path);

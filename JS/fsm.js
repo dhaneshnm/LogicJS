@@ -1,5 +1,4 @@
- var states = 9;
-	function PlayerMove(playerObject){			
+ 	function PlayerMove(playerObject){			
  		switch(playerObject.state.get_movement()){
  		case "forward"://move  forward 
  			var new_position = 	playerObject.Position+states;	

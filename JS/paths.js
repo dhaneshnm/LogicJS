@@ -20,10 +20,6 @@ var findNextNode = function findNextNode(openlist){
 		}
 		return lowest;//wrong logic,but will change it soon
 	}
-var openlist = [];
-var closedlist =[];
-var processedlist = [];
-var map_size = 9;
 function ProcessNode(map,current_node,next_row,next_column,startandend){
 	//console.log("******ProcessNode*******");
 	//console.log(current_node);		

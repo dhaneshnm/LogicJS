@@ -1,5 +1,3 @@
-var startandend = {"level":1};
-
 var generate_map = function generate_map(level){
 	var Map = new Array(9);
 	for (var i = 0; i < Map.length; i++) {
