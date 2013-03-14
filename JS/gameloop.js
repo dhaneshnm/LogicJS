@@ -100,7 +100,7 @@ function RenderUI(maparray){
 			});	
 			//
 			$("#code_wrapper #show_path").click(function(){
-				var startend = {"start":0,"end":38};
+				/*var startend = {"start":0,"end":38};
 				var thePath = paths(map,startend);
 				var path1 = paths(map,startend);
 				ShowPath(path1);
@@ -109,13 +109,14 @@ function RenderUI(maparray){
 				ShowPath(path2);
 				startend = {"start":48,"end":50};
 				var path3 = paths(map,startend);
-				ShowPath(path3);				
+				ShowPath(path3);	*/			
 				//loadPathImage(meshArray[5][5]);					
+				GeneratePath();
 				$(this).hide();
 				$("#code_wrapper #hide_path").show();
 			})
 			$("#code_wrapper #hide_path").click(function(){
-				var startend = {"start":0,"end":38};
+				/*var startend = {"start":0,"end":38};
 				var thePath = paths(map,startend);
 				var path1 = paths(map,startend);
 				HidePath(path1);
@@ -124,7 +125,8 @@ function RenderUI(maparray){
 				HidePath(path2);
 				startend = {"start":48,"end":50};
 				var path3 = paths(map,startend);
-				HidePath(path3);			
+				HidePath(path3);	*/
+				ClearPath();		
 				$(this).hide();
 				$("#code_wrapper #show_path").show();
 			})		
@@ -183,4 +185,44 @@ function LoadPathImage(boxSprite){
 function ClearPathImage(boxSprite){
 	boxSprite.loadImg("images/Rocks.png");
 	boxSprite.update();
+}
+
+function GeneratePath(){
+	var collectables = startandend["collectables"];
+	var start = startandend["start"];
+	var end = null;
+	for (var i = 0; i < collectables.length; i++) {
+		end = collectables[i];
+		console.log(start);
+		console.log(end);
+		var startend = {"start":start,"end":end};
+		var path = paths(map,startend);
+		ShowPath(path);
+		start = end;
+		end = null;
+	};	
+	end = startandend["end"];	
+	var startend = {"start":start,"end":end}
+	var path = paths(map,startend);
+	ShowPath(path);
+}
+
+function ClearPath(){
+	var collectables = startandend["collectables"];
+	var start = startandend["start"];
+	var end = null;
+	for (var i = 0; i < collectables.length; i++) {
+		end = collectables[i];
+		console.log(start);
+		console.log(end);
+		var startend = {"start":start,"end":end};
+		var path = paths(map,startend);
+		HidePath(path);
+		start = end;
+		end = null;
+	};	
+	end = startandend["end"];	
+	var startend = {"start":start,"end":end}
+	var path = paths(map,startend);
+	HidePath(path);
 }

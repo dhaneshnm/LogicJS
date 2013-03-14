@@ -58,9 +58,8 @@ function ProcessNode(map,current_node,next_row,next_column,startandend){
 			}		
 	}
 	else{
-		console.log("Non navigable block");
-		console.log(map[next_row][next_column]);
-		console.log(next_row+"booya"+next_column);
+		console.log("Non navigable block");		
+		
 	}
 	}
 function paths(map,startandend) {		
