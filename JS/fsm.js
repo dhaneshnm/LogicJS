@@ -265,22 +265,26 @@ function CheckforCollectable(position){
   return false;	
 }
 function updatepickup(playerObject,position){
-	for(var i=0;i<global_collectables.length;i++){
-		if(global_collectables[i].X === Math.floor(position%states) && global_collectables[i].Y === Math.floor(position/states)){
-			var gem = global_collectables[i];
-			console.log("trying to pickup "+ gem);
-			playerObject.collectables.push(gem);
-			gem.spriteObj.position(500,playerObject.collectables.length*50);
-			gem.spriteObj.update();
-			global_collectables.splice (i, i);
-		}
-	}
+ "use strict";
+ var i,gem;
+ for(i=0;i<global_collectables.length;i=i+1){
+  if(global_collectables[i].X === Math.floor(position%states) && global_collectables[i].Y === Math.floor(position/states)){
+   gem = global_collectables[i];
+   console.log("trying to pickup "+ gem);
+   playerObject.collectables.push(gem);
+   gem.spriteObj.position(500,playerObject.collectables.length*50);
+   gem.spriteObj.update();
+   global_collectables.splice (i, i);
+  }
+ }
 }
 function updatedrop(playerObject,position){
-	var gem = playerObject.collectables.pop();
-	gem.X = Math.floor(position%states);
-	gem.Y = Math.floor(position/states);
-	gem.spriteObj.position(gem.X*50,gem.Y*50);
-	gem.spriteObj.update();
-	global_collectables.push(gem);
+ "use strict";
+ var gem = playerObject.collectables.pop();
+ gem.X = Math.floor(position%states);
+ gem.Y = Math.floor(position/states);
+ gem.spriteObj.position(gem.X*50,gem.Y*50);
+ gem.spriteObj.update();
+ global_collectables.push(gem);
 }
+
