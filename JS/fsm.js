@@ -230,7 +230,7 @@ function updatemotion(playerObject,new_position){
 		}
 		else{
 			console.log("You have arrived ..");
-			alert("you have cleared level"+level+"Now you can kick ass at next level!!");
+			alert("you have cleared level "+level);
 			level = level+1;
 			gameloop(level);
 		}

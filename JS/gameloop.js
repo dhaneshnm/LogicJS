@@ -160,6 +160,7 @@ function GeneratePath(){
 		end = collectables[i];		
 		var startend = {"start":start,"end":end};
 		var path = paths(map,startend);
+		console.log(path);
 		ShowPath(path);
 		start = end;
 		end = null;
@@ -167,6 +168,7 @@ function GeneratePath(){
 	end = startandend["end"];	
 	var startend = {"start":start,"end":end}
 	var path = paths(map,startend);	
+	console.log(path);
 	ShowPath(path);
 }
 
