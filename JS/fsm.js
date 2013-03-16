@@ -32,44 +32,45 @@ function PlayerMove(playerObject){
    console.log("invalid input for PlayerMove by "+playerObject.state.get_movement());
  }
 }	
-	function PlayerPickup(playerObject){
-		switch(playerObject.state.get_movement()){
-	 		case "forward"://Pick up from front
-	 			if(CheckforCollectable(playerObject.Position+states)){
-	 				updatepickup(playerObject,playerObject.Position+states);
-	 			}
-	 			else{
-	 				console.log("Nothing to puck up there");
-	 			}
-	 			break;
-	 		case "back"://Pick up from back
-	 			if(CheckforCollectable(playerObject.Position-states)){
-	 				updatepickup(playerObject,playerObject.Position-states);
-	 			}
-	 			else{
-	 				console.log("Nothing to puck up there");
-	 			}
-	 			break;
-	 		case "left"://Pick up from left
-	 			if(CheckforCollectable(playerObject.Position+1)){
-	 				updatepickup(playerObject,playerObject.Position+1);
-	 			}
-	 			else{
-	 				console.log("Nothing to puck up there");
-	 			}
-	 			break;
-	 		case "right"://Pick up from right
-		 		if(CheckforCollectable(playerObject.Position-1)){
-		 			updatepickup(playerObject,playerObject.Position-1);
-	 			}
-	 			else{
-	 				console.log("Nothing to puck up there");
-	 			}
-		 		break;
-		 	default:
-		 		console.log("invalid input for PlayerMove by "+playerObject.state.get_movement());
-	 	};
-	}
+function PlayerPickup(playerObject){
+ "use strict";
+ switch(playerObject.state.get_movement()){
+  case "forward"://Pick up from front
+   if(CheckforCollectable(playerObject.Position+states)){
+    updatepickup(playerObject,playerObject.Position+states);
+   }
+   else{
+    console.log("Nothing to puck up there");
+   }
+   break;
+ case "back"://Pick up from back
+  if(CheckforCollectable(playerObject.Position-states)){
+   updatepickup(playerObject,playerObject.Position-states);
+  }
+  else{
+   console.log("Nothing to puck up there");
+  }
+  break;
+ case "left"://Pick up from left
+  if(CheckforCollectable(playerObject.Position+1)){
+   updatepickup(playerObject,playerObject.Position+1);
+  }
+  else{
+   console.log("Nothing to puck up there");
+  }
+  break;
+ case "right"://Pick up from right
+  if(CheckforCollectable(playerObject.Position-1)){
+   updatepickup(playerObject,playerObject.Position-1);
+  }
+  else{
+   console.log("Nothing to puck up there");
+  }
+  break;
+ default:
+  console.log("invalid input for PlayerMove by "+playerObject.state.get_movement());
+ };
+}
 	function PlayerDrop(playerObject){
 		switch(playerObject.state.get_movement()){
  		case "forward"://move  forward 
