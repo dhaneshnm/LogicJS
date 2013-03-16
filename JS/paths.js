@@ -116,7 +116,7 @@ function check_for_node(list,node){
  "use strict";
  var i,position;
  position = -1;
- for (i = list.length - 1; i >= 0; i=i+1) {
+ for (i = list.length - 1; i >= 0; i=i-1) {
   if((list[i].column_number === node.column_number) && (list[i].row_number === node.row_number)){
    position = i;
    break;
