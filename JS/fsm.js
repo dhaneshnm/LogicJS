@@ -187,56 +187,60 @@ function StateChange(newstate,playerObject){
 }	
 
 function interpret_move(command,playerObject){
-	//code for "repeat instruction"
-	if(command.indexOf("repeat")>-1){
-		var ins = command.split("(");
-		var params = ins[1].split(",");
-		var repeat_times = parseInt(params[1]);
-		var move = params[0];
-		for (var i = 0; i < repeat_times; i++) {
-			StateChange(move,playerObject);	
-		};		
-	}
-	else if(command === "f1"){
-		executeCode("#f1");
-		}
-	else if(command == "f2"){
-		executeCode("#f2");
-	}
-	else{
-		StateChange(command,playerObject);
-	}
-}	
+ "use strict";
+ var ins,params,repeat_times,move,i;
+ //code for "repeat instruction"
+ if(command.indexOf("repeat")>-1){
+  ins = command.split("(");
+  params = ins[1].split(",");
+  repeat_times = parseInt(params[1],10);
+  move = params[0];
+  for (i = 0; i < repeat_times; i=i+1) {
+   StateChange(move,playerObject);	
+   }		
+  }
+  else if(command === "f1"){
+   executeCode("#f1");
+  }
+  else if(command === "f2"){
+   executeCode("#f2");
+   }
+  else{
+   StateChange(command,playerObject);
+  }
+}
 function updatemotion(playerObject,new_position){	
-	if(isValidMove(new_position)){
- 		playerObject.Position = new_position;
- 		var x = Math.floor(playerObject.Position/states);
-	 	var y = Math.floor(playerObject.Position%states);
-	 	console.log(x+"booyaa"+y); 	
-	 	playerObject.spriteObj.position(y*5,x*5); 		 		
-	 	playerObject.spriteObj.update();
-	 	playerObject.spriteObj.position(y*5*2,x*5*2); 		 		
-	 	playerObject.spriteObj.update();
-	 	playerObject.spriteObj.position(y*5*5*2,x*5*5*2); 		 		
-	 	playerObject.spriteObj.update();
-	 }
- 	else{
- 		console.log("invalid move")
- 	}
- 	if(new_position == winning_position){
- 		if(level == 4){
-			console.log("You have arrived ..");
-			alert("you have cleared all levels.you are a Logic Ninja!!!");
-			window.location.reload();
-		}
-		else{
-			console.log("You have arrived ..");
-			alert("you have cleared level "+level);
-			level = level+1;
-			gameloop(level);
-		}
-	}	
+ "use strict";
+ var x,y;
+ if(isValidMove(new_position)){
+  playerObject.Position = new_position;
+  x = Math.floor(playerObject.Position/states);
+  y = Math.floor(playerObject.Position%states);
+  console.log(x+"booyaa"+y); 	
+  playerObject.spriteObj.position(y*5,x*5); 		 		
+  playerObject.spriteObj.update();
+  playerObject.spriteObj.position(y*5*2,x*5*2); 		 		
+  playerObject.spriteObj.update();
+  playerObject.spriteObj.position(y*5*5*2,x*5*5*2); 		 		
+  playerObject.spriteObj.update();
  }
+ else{ 
+  console.log("invalid move");
+  }
+ if(new_position === winning_position){
+  if(level === 4){
+   console.log("You have arrived ..");
+   alert("you have cleared all levels.you are a Logic Ninja!!!");
+   window.location.reload();
+  }
+  else{
+   console.log("You have arrived ..");
+   alert("you have cleared level "+level);
+   level = level+1;
+   gameloop(level);
+  }
+ }	
+}
 
 function isValidMove(position) 	{
 	var x = Math.floor(position/states);
