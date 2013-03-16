@@ -1,37 +1,37 @@
-function PlayerMove(playerObject){
- "use strict";
- var new_position;			
- switch(playerObject.state.get_movement()){
-  case "forward"://move  forward 
-   new_position = 	playerObject.Position+states;	
-   updatemotion(playerObject,new_position);	
-   break;
-  case "back"://move  forward
-   new_position = playerObject.Position-states; 		 		 				 			
-   updatemotion(playerObject,new_position);	
-   break;
-  case "left"://turn left 	 					
-   if((playerObject.Position%states) === 8){
-    console.log("invalid move");
-   }
-   else{
-    new_position = 	 playerObject.Position+1; 			 				 			
-    updatemotion(playerObject,new_position);	
-   }
-   break;
-  case "right"://turn right
-   if((playerObject.Position%states) === 0){
-    console.log("invalid move");    
-   }
-  else{
-   new_position = 	 playerObject.Position-1; 			 				 			
-   updatemotion(playerObject,new_position);	
-  } 		
-  break;
-  default:
-   console.log("invalid input for PlayerMove by "+playerObject.state.get_movement());
- }
-}		
+ 	function PlayerMove(playerObject){			
+ 		switch(playerObject.state.get_movement()){
+ 		case "forward"://move  forward 
+ 			var new_position = 	playerObject.Position+states;	
+ 			updatemotion(playerObject,new_position);	
+ 			break;
+ 		case "back"://move  forward
+ 			var new_position = 	playerObject.Position-states; 		 		 				 			
+ 			updatemotion(playerObject,new_position);	
+ 			break;
+ 		case "left"://turn left 	 					
+ 			if((playerObject.Position%states) == 8){
+ 				console.log("invalid move");
+ 				return;
+ 			}
+ 			else{
+ 				var new_position = 	 playerObject.Position+1; 			 				 			
+ 				updatemotion(playerObject,new_position);	
+ 			}
+ 			break;
+ 		case "right"://turn right
+	 		if((playerObject.Position%states) == 0){
+ 				console.log("invalid move");
+ 				return;
+ 			}
+ 			else{
+ 				var new_position = 	 playerObject.Position-1; 			 				 			
+ 				updatemotion(playerObject,new_position);	
+ 			} 		
+	 		break;
+	 	default:
+	 		console.log("invalid input for PlayerMove by "+playerObject.state.get_movement());
+ 		};
+	}	
 	function PlayerPickup(playerObject){
 		switch(playerObject.state.get_movement()){
 	 		case "forward"://Pick up from front
@@ -206,85 +206,82 @@ function interpret_move(command,playerObject){
 		StateChange(command,playerObject);
 	}
 }	
-function updatemotion(playerObject, new_position) {
-    "use strict";
-    if(isValidMove(new_position)){
-     var x ,y = Math.floor(playerObject.Position/states);
-     y = Math.floor(playerObject.Position%states);	
-     playerObject.spriteObj.position(y*5,x*5); 		 		
-     playerObject.spriteObj.update();
-     playerObject.spriteObj.position(y*5*2,x*5*2); 		 		
-     playerObject.spriteObj.update();
-     playerObject.spriteObj.position(y*5*5*2,x*5*5*2); 		 		
-     playerObject.spriteObj.update();	
-    }
-   else{
-    console.log("invalid move");
-   }
-   if(new_position === winning_position){
-    if(level === 4){
-     console.log("You have arrived ..");
-     alert("you have cleared all levels.you are a Logic Ninja!!!");
-     window.location.reload();
-    }
-    else{
-     console.log("You have arrived ..");
-     alert("you have cleared level "+level);
-     level = level+1;
-     gameloop(level);
-    }
-  }	
-}
+function updatemotion(playerObject,new_position){	
+	if(isValidMove(new_position)){
+ 		playerObject.Position = new_position;
+ 		var x = Math.floor(playerObject.Position/states);
+	 	var y = Math.floor(playerObject.Position%states);
+	 	console.log(x+"booyaa"+y); 	
+	 	playerObject.spriteObj.position(y*5,x*5); 		 		
+	 	playerObject.spriteObj.update();
+	 	playerObject.spriteObj.position(y*5*2,x*5*2); 		 		
+	 	playerObject.spriteObj.update();
+	 	playerObject.spriteObj.position(y*5*5*2,x*5*5*2); 		 		
+	 	playerObject.spriteObj.update();
+	 }
+ 	else{
+ 		console.log("invalid move")
+ 	}
+ 	if(new_position == winning_position){
+ 		if(level == 4){
+			console.log("You have arrived ..");
+			alert("you have cleared all levels.you are a Logic Ninja!!!");
+			window.location.reload();
+		}
+		else{
+			console.log("You have arrived ..");
+			alert("you have cleared level "+level);
+			level = level+1;
+			gameloop(level);
+		}
+	}	
+ }
+
 function isValidMove(position) 	{
- "use strict";
- var x,y, valid;
- x = Math.floor(position/states);
- y = Math.floor(position%states); 	
- if((map[x][y ] === 0 )||(map[x][y ] === 2)){
-  valid = true;
- }
- else{
-  valid = false;
- }
- return valid;
-}
-function UpdateAvatar(playerObject){
- "use strict";	
- var newstate = playerObject.state.get_movement();
- playerObject.spriteObj.loadImg(state_image_map[newstate]);	
- playerObject.spriteObj.update();
-}
-function CheckforCollectable(position){
- "use strict";
- var i;
- for(i=0;i<global_collectables.length;i=i+1){		
-  if(global_collectables[i].X === Math.floor(position%states) && global_collectables[i].Y === Math.floor(position/states)){
-   return true;
-   }
-  }
-  return false;	
-}
-function updatepickup(playerObject,position){
- "use strict";
- var i,gem;
- for(i=0;i<global_collectables.length;i=i+1){
-  if(global_collectables[i].X === Math.floor(position%states) && global_collectables[i].Y === Math.floor(position/states)){
-   gem = global_collectables[i];
-   console.log("trying to pickup "+ gem);
-   playerObject.collectables.push(gem);
-   gem.spriteObj.position(500,playerObject.collectables.length*50);
-   gem.spriteObj.update();
-   global_collectables.splice (i, i);
-  }
- }
-}
-function updatedrop(playerObject,position){
- "use strict";
- var gem = playerObject.collectables.pop();
- gem.X = Math.floor(position%states);
- gem.Y = Math.floor(position/states);
- gem.spriteObj.position(gem.X*50,gem.Y*50);
- gem.spriteObj.update();
- global_collectables.push(gem);
+	var x = Math.floor(position/states);
+ 	var y = Math.floor(position%states); 	
+ 	if((map[x][y ] === 0 )||(map[x][y ] === 2)){
+ 		return true;
+ 		}
+ 	else{
+ 		return false;
+ 		}
 }
 
+function UpdateAvatar(playerObject){	
+	var newstate = playerObject.state.get_movement();
+	playerObject.spriteObj.loadImg(state_image_map[newstate]);	
+	playerObject.spriteObj.update();
+}
+function CheckforCollectable(position){
+	for(var i=0;i<global_collectables.length;i++){
+		console.log(global_collectables[i].X);
+		console.log(global_collectables[i].Y);
+		console.log(Math.floor(position/states));
+		console.log(Math.floor(position%states));
+		if(global_collectables[i].X === Math.floor(position%states) && global_collectables[i].Y === Math.floor(position/states)){
+			return true;
+		}
+	}
+	return false;	
+}
+function updatepickup(playerObject,position){
+	for(var i=0;i<global_collectables.length;i++){
+		if(global_collectables[i].X === Math.floor(position%states) && global_collectables[i].Y === Math.floor(position/states)){
+			var gem = global_collectables[i];
+			console.log("trying to pickup "+ gem);
+			playerObject.collectables.push(gem);
+			gem.spriteObj.position(500,playerObject.collectables.length*50);
+			gem.spriteObj.update();
+			global_collectables.splice (i, i);
+		}
+	}
+}
+function updatedrop(playerObject,position){
+	var gem = playerObject.collectables.pop();
+	gem.X = Math.floor(position%states);
+	gem.Y = Math.floor(position/states);
+	gem.spriteObj.position(gem.X*50,gem.Y*50);
+	gem.spriteObj.update();
+	global_collectables.push(gem);
+}
