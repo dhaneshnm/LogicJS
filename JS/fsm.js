@@ -241,22 +241,25 @@ function updatemotion(playerObject,new_position){
   }
  }	
 }
-
-function isValidMove(position) 	{
-	var x = Math.floor(position/states);
- 	var y = Math.floor(position%states); 	
- 	if((map[x][y ] === 0 )||(map[x][y ] === 2)){
- 		return true;
- 		}
- 	else{
- 		return false;
- 		}
+function isValidMove(position) {
+ "use strict";
+ var x,y,returnValue;
+ returnValue = false;
+ x = Math.floor(position/states);
+ y = Math.floor(position%states); 	
+ if((map[x][y ] === 0 )||(map[x][y ] === 2)){
+  returnValue = true;
+  }
+ else{
+  returnValue = false;
+ }
+ return returnValue;
 }
-
 function UpdateAvatar(playerObject){	
-	var newstate = playerObject.state.get_movement();
-	playerObject.spriteObj.loadImg(state_image_map[newstate]);	
-	playerObject.spriteObj.update();
+ "use strict";
+ var newstate = playerObject.state.get_movement();
+ playerObject.spriteObj.loadImg(state_image_map[newstate]);	
+ playerObject.spriteObj.update();
 }
 function CheckforCollectable(position){
 	for(var i=0;i<global_collectables.length;i++){
