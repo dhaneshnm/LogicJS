@@ -91,92 +91,105 @@ function renderUI(maparray){
  });	   
 });	
 }
-var state_image_map = {"forward":straight_avtar,"back":back_avtar,"left":left_avtar,"right":right_avtar} 
 function get_Sprite(state){
-	var foreground = scene.Layer("foreground");
-	var player = scene.Sprite(state_image_map[state],{layer:foreground,color:"grey"});	
-	return player;
+ "use strict";
+ var foreground ,player;
+ foreground= scene.Layer("foreground");
+ player = scene.Sprite(state_image_map[state],{layer:foreground,color:"grey"}); 
+ return player;
 }
 function simpleParse(code){
-	var program = code.split(";");
-	return program;
+ "use strict";
+ var program = code.split(";");
+ return program;
 }
 
 function executeCode(function_window_id){
-	var code = $(function_window_id).val();
-	console.log(code);
-	code = code.replace(/(\r\n|\n|\r)/gm,"");
-	code = code.replace(/(\s)/gm,"");
-	var program = simpleParse(code);		
-	for(var i=0;i<program.length;i++){
-		interpret_move(program[i],current_player);				
-	}	
+ "use strict";
+ var code,i,program;
+ code  = $(function_window_id).val();
+ console.log(code);
+ code = code.replace(/(\r\n|\n|\r)/gm,"");
+ code = code.replace(/(\s)/gm,"");
+ program = simpleParse(code);   
+ for(i=0;i<program.length;i=i+1){
+  interpret_move(program[i],current_player);        
+ }  
 }
 function execute_line(){
-	var code = $("#code_window").val();
-	var program = simpleParse(code);
-	console.log(program.length);					
-	var line_code = program[program.length-1];
-	line_code = line_code.trim().toLowerCase();
-	interpret_move(line_code,current_player);		
+ "use strict";
+ var code,program,line_code;
+ code = $("#code_window").val();
+ program = simpleParse(code);
+ console.log(program.length);         
+ line_code = program[program.length-1];
+ line_code = line_code.trim().toLowerCase();
+ interpret_move(line_code,current_player);    
 }
 gameloop(level);
 function ShowPath(thePath){
-	for(var index =1;index <thePath.length-1;index++){
-		LoadPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
-	}
+ "use strict";
+ for(var index =1;index <thePath.length-1;index++){
+  LoadPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);          
+ }
 }
 function HidePath(thePath){
-	for(var index =1;index <thePath.length-1;index++){
-		ClearPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);					
-	}
+ "use strict";
+ for(var index =1;index <thePath.length-1;index++){
+  ClearPathImage(meshArray[thePath[index].row_number][thePath[index].column_number]);         
+ }
 }
 function LoadPathImage(boxSprite){
-	boxSprite.loadImg("images/Ice.png");
-	boxSprite.update();
+ "use strict";
+ boxSprite.loadImg("images/Ice.png");
+ boxSprite.update();
 }
-
 function ClearPathImage(boxSprite){
-	boxSprite.loadImg("images/Rocks.png");
-	boxSprite.update();
+ "use strict";
+ boxSprite.loadImg("images/Rocks.png");
+ boxSprite.update();
 }
 
 function GeneratePath(){
-	var collectables = startandend["collectables"];
-	var start = startandend["start"];	
-	var end = null;
-	for (var i = 0; i < collectables.length; i++) {
-		end = collectables[i];		
-		var startend = {"start":start,"end":end};
-		var path = paths(map,startend);
-		console.log(path);
-		ShowPath(path);
-		start = end;
-		end = null;
-	};	
-	end = startandend["end"];	
-	var startend = {"start":start,"end":end}
-	var path = paths(map,startend);	
-	console.log(path);
-	ShowPath(path);
+ "use strict";
+ var collectables,start,end,path,startend,i;
+ collectables = startandend.collectables;
+ start = startandend.start; 
+ end = null;
+ for (i = 0; i < collectables.length; i=i+1) {
+  end = collectables[i];    
+  startend = {"start":start,"end":end};
+  path = paths(map,startend);
+  console.log(path);
+  ShowPath(path);
+  start = end;
+  end = null;
+ }  
+ end = startandend.end; 
+ startend = {"start":start,"end":end}
+ path = paths(map,startend);  
+ console.log(path);
+ ShowPath(path);
 }
 
 function ClearPath(){
-	var collectables = startandend["collectables"];
-	var start = startandend["start"];
-	var end = null;
-	for (var i = 0; i < collectables.length; i++) {
-		end = collectables[i];
-		console.log(start);
-		console.log(end);
-		var startend = {"start":start,"end":end};
-		var path = paths(map,startend);
-		HidePath(path);
-		start = end;
-		end = null;
-	};	
-	end = startandend["end"];	
-	var startend = {"start":start,"end":end}
-	var path = paths(map,startend);
-	HidePath(path);
+ "use strict";
+ var collectables,start,end,path,startend,i;
+ collectables = startandend.collectables;
+ start = startandend.start;
+ end = null;
+ for (i = 0; i < collectables.length; i=i+1) {
+  end = collectables[i];
+  console.log(start);
+  console.log(end);
+  startend = {"start":start,"end":end};
+  path = paths(map,startend);
+  HidePath(path);
+  start = end;
+  end = null;
+ }  
+ end = startandend.end; 
+ startend = {"start":start,"end":end}
+ path = paths(map,startend);
+ HidePath(path);
 }

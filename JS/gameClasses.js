@@ -10,6 +10,7 @@ var straight_avtar = 'images/man_straight.gif';
 var back_avtar = 'images/man_back.gif';
 var global_collectables = new Array();
 var level = 1;
+var state_image_map = {"forward":straight_avtar,"back":back_avtar,"left":left_avtar,"right":right_avtar} ;
 /***********used in map.js *********/
 var startandend = {"level":1};
 /***************used in path.js**********/
