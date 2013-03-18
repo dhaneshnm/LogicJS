@@ -1,4 +1,4 @@
 LogicJS
 =======
 
-A JavaScript game Engine for programming based games
+A JavaScript Game Engine for programming based games
